@@ -85,6 +85,31 @@
                                     <input type="tel" id="number" class="form-control form-control-lg" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="yes"/>
                                     <label class="form-label" for="number">Phone Number</label>
                                 </div>
+                                <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+
+                                    <h6 class="mb-0 me-4">Role: </h6>
+
+                                    <div class="form-check form-check-inline mb-0 me-4">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="admin"
+                                               value="option1" />
+                                        <label class="form-check-label" for="admin">Admin</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-0 me-4">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="trader"
+                                               value="option2" />
+                                        <label class="form-check-label" for="trader">StockTrader</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline mb-0">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="industry"
+                                               value="option3" />
+                                        <label class="form-check-label" for="Industry">Industry</label>
+                                    </div>
+
+                                </div>
+                                 
+
                                     <div class="form-outline mb-4">
                                         <input type="email" id="email" class="form-control form-control-lg" required="yes" />
                                         <label class="form-label" for="email">Email ID</label>
@@ -101,10 +126,11 @@
 
 
                                 <div class="d-flex justify-content-end pt-3">
-                                    <button type="button"  onclick="location.href='signup.html'" class="btn btn-light btn-lg">Reset all</button>
-                                    <button type="button" onclick="location.href='profile.html'" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                                    <button type="button"  onclick="location.href='signup.html'" class="btn btn-light btn-md">Reset all</button>
+                                    <button type="button" onclick="location.href='profile.html'" class="btn btn-warning btn-md ms-2">Submit form</button>
                                 </div>
-
+                                <div> <p class="mb-5 pb-lg-2" style="color: #393f81;">Already have an account? <a href="/login.html"
+                                    style="color: #393f81;">Login click here</a></p> </div> 
                             </div>
                         </div>
                     </div>
