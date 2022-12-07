@@ -1,0 +1,11 @@
+{
+  "firstName": "Tom",
+  "lastName": "Jerry",
+  "profilePicture": "profile.png",
+  "location": "Boston, MA",
+  "dateOfBirth":"23/3/1996",
+"gender": "Female",
+  "nickName": "nandy",
+  "bookMarks":"Bookmarks"
+
+}

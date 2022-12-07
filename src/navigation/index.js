@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
@@ -6,6 +8,12 @@ const NavigationComponent = () => {
   const dropdownToggle = () => {
     setExpanded((e) => !e);
   };
+  const navigate = useNavigate();
+
+  function goToProfile(event) {
+
+    navigate('../profile');
+  }
 
   return (
     <>
@@ -25,7 +33,7 @@ const NavigationComponent = () => {
         <div className="col-md-1">
           <a onClick={dropdownToggle}>
             <span className="bg-light rounded-pill p-2">
-              <i class="bi bi-person-fill text-dark fs-4"></i>
+              <i class="bi bi-person-fill text-dark fs-4" onClick={goToProfile}></i>
             </span>
             {!expanded && <i class="bi bi-caret-down-fill text-white ms-2"></i>}
             {expanded && <i class="bi bi-caret-up-fill text-white ms-2"></i>}
