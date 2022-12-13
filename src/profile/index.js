@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import "./index.css"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import Location from "./location.js" ;
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
@@ -132,6 +133,8 @@ const ProfileComponent = () => {
                             </Form.Text>
                         </Form.Group>
                     </div>
+                    <Location/>
+
                 </div>
             </Form>
 
@@ -139,4 +142,5 @@ const ProfileComponent = () => {
         </div>
     );
 };
+
 export default ProfileComponent;
