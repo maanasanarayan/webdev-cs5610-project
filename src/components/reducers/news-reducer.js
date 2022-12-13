@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNewsThunk } from "./../services/news-thunks";
+import { getNewsThunk } from "../../services/news-thunks";
 
 const initialState = {
   news: [],

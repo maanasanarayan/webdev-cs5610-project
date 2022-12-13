@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
@@ -20,7 +21,7 @@ const NavigationComponent = () => {
             class="rounded-pill w-100 h-100 bg-light border-0 ps-3"
             placeholder="Search for companies"
           />
-          <i className="bi bi-search position-absolute text-dark wd-search-icon"></i>
+          <Link to={"/search"}><i className="bi bi-search position-absolute text-dark wd-search-icon"></i></Link>
         </div>
         <div className="col-md-1">
           <a onClick={dropdownToggle}>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getStockDataThunk } from "./../services/stock-thunks";
+import { getStockDataThunk } from "../../services/stock-thunks";
 import StockTickerItem from "./stock-ticker-item";
 
 const HomeStockStrip = () => {

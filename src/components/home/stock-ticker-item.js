@@ -1,6 +1,7 @@
 import React from "react";
 
 const StockTickerItem = ({ quote }) => {
+    //console.log(quote);
   return (
     <div className="wd-stock row border-end m-2">
       <div className="col-2">

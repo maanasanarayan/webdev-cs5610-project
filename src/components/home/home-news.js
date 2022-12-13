@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NewsItem from "../news/news-item";
-import { getNewsThunk } from "./../services/news-thunks";
+import { getNewsThunk } from "../../services/news-thunks";
 
 const HomePageNews = () => {
   const { news, loading } = useSelector((state) => state.news);
