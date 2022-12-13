@@ -21,3 +21,50 @@ code {
   bottom: 8px;
   right: 30px;
 }
+
+.wd-home-banner {
+  background-image: url(./../public/images/homepage-banner.jpg);
+  height: 450px;
+  color: #17a2b8;
+}
+
+.wd-overflow-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.wd-color-blue {
+  color: #17a2b8;
+}
+
+.wd-text-bold {
+  font-weight: bold;
+}
+
+.wd-stock-tickers {
+  display: flex;
+  animation: swipe 50000ms linear infinite backwards;
+}
+
+.wd-stock {
+  width: 350px;
+}
+
+.wd-inner {
+  width: 100%;
+}
+
+.wd-wrapper {
+  display: flex;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
+}
