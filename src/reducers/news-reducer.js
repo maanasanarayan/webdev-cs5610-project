@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNewsThunk } from "./../services/news-thunks";
+import {
+  getNewsThunk,
+  getRecommendedNewsThunk,
+} from "./../services/news-thunks";
 
 const initialState = {
   news: [],
-  loading: false,
+  recommendedNews: [],
+  loadingNews: false,
+  loadingRecs: false,
 };
 
 const newsSlice = createSlice({
@@ -11,15 +16,26 @@ const newsSlice = createSlice({
   initialState,
   extraReducers: {
     [getNewsThunk.pending]: (state) => {
-      state.loading = true;
+      state.loadingNews = true;
       state.news = [];
     },
     [getNewsThunk.fulfilled]: (state, { payload }) => {
-      state.loading = false;
+      state.loadingNews = false;
       state.news = payload;
     },
     [getNewsThunk.rejected]: (state) => {
-      state.loading = false;
+      state.loadingNews = false;
+    },
+    [getRecommendedNewsThunk.pending]: (state) => {
+      state.loadingRecs = false;
+      state.recommendedNews = [];
+    },
+    [getRecommendedNewsThunk.fulfilled]: (state, { payload }) => {
+      state.loadingRecs = false;
+      state.recommendedNews = payload;
+    },
+    [getRecommendedNewsThunk.rejected]: (state) => {
+      state.loadingRecs = false;
     },
   },
 });
