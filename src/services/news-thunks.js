@@ -7,7 +7,7 @@ export const getNewsThunk = createAsyncThunk("news/getAllNews", async () => {
 });
 
 export const getRecommendedNewsThunk = createAsyncThunk(
-  "news/getRecommendedNews",
+  "recommendedNews/getRecommendedNews",
   async (symbol) => {
     let news = await service.getRecommendedNews(symbol);
     return news;

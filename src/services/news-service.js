@@ -14,5 +14,5 @@ export const getAllNews = async () => {
 export const getRecommendedNews = async (symbol) => {
   const response = await axios.get(`${NEWS_API}&tickers=${symbol}`);
   const news = response.data.feed;
-  return news.slice(0, 3);
+  return news.slice(0, 6);
 };

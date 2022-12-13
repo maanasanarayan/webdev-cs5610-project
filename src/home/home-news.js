@@ -5,6 +5,7 @@ import {
   getNewsThunk,
   getRecommendedNewsThunk,
 } from "./../services/news-thunks";
+import { getAllUsersThunk } from "./../services/user-thunks";
 
 const HomePageNews = () => {
   const { news, recommendedNews, loadingNews, loadingRecs } = useSelector(
@@ -15,15 +16,20 @@ const HomePageNews = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsThunk());
-
-    if (loggedIn && user.role === "stocktrader") {
+    console.log("----User----");
+    console.log(user);
+    if (loggedIn && user.role === "TRADER") {
       dispatch(getRecommendedNewsThunk("AAPL"));
+    } else if (loggedIn && user.role === "ADMIN") {
+      dispatch(getAllUsersThunk());
+    } else if (loggedIn && user.role === "INDUSTRY") {
+      dispatch(getRecommendedNewsThunk(user.username));
     }
   }, []);
 
   return (
     <>
-      {loggedIn && user.role === "stocktrader" && (
+      {loggedIn && user.role === "TRADER" && (
         <>
           <h2 className="mt-2">Recommended For You: </h2>
           <div className="list-group m-4">
@@ -32,15 +38,50 @@ const HomePageNews = () => {
               if (n.banner_image) return <NewsItem news={n} />;
             })}
           </div>
+          <h2 className="mt-2">Trending Today: </h2>
+          <div className="list-group m-4">
+            {loadingNews && <div className="list-group-item">Loading...</div>}
+            {news.map((n) => {
+              if (n.banner_image) return <NewsItem news={n} />;
+            })}
+          </div>
         </>
       )}
-      <h2 className="mt-2">Trending Today: </h2>
-      <div className="list-group m-4">
-        {loadingNews && <div className="list-group-item">Loading...</div>}
-        {news.map((n) => {
-          if (n.banner_image) return <NewsItem news={n} />;
-        })}
-      </div>
+      {loggedIn && user.role === "INDUSTRY" && (
+        <>
+          <h2 className="mt-2">Industry News: </h2>
+          <div className="list-group m-4">
+            {loadingRecs && <div className="list-group-item">Loading...</div>}
+            {recommendedNews.map((n) => {
+              if (n.banner_image) return <NewsItem news={n} />;
+            })}
+          </div>
+        </>
+      )}
+
+      {loggedIn && user.role === "ADMIN" && (
+        <>
+          <h2 className="mt-2">Industry News: </h2>
+          <div className="list-group m-4">
+            {loadingRecs && <div className="list-group-item">Loading...</div>}
+            {recommendedNews.map((n) => {
+              if (n.banner_image) return <NewsItem news={n} />;
+            })}
+          </div>
+        </>
+      )}
+
+      {user.role === "ANONYMOUS" && (
+        <>
+          <h2 className="mt-2">Trending Today: </h2>
+          <div className="list-group m-4">
+            {loadingNews && <div className="list-group-item">Loading...</div>}
+            {news.map((n) => {
+              if (n.banner_image) return <NewsItem news={n} />;
+            })}
+          </div>
+        </>
+      )}
     </>
   );
 };
