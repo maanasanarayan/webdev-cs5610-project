@@ -23,23 +23,23 @@ const userSlice = createSlice({
       console.log("State: ", state);
     },
     changeFirstName(state, action) {
-      state.fname = action.payload.fname;
+      state.user.fname = action.payload.fname;
     },
     changeLastName(state, action) {
-      state.lname = action.payload.lname;
+      state.user.lname = action.payload.lname;
     },
     changeGender(state, action) {
-      state.gender = action.payload.gender;
+      state.user.gender = action.payload.gender;
     },
     changePhoneNumber(state, action) {
-      state.phonenumber = action.payload.phonenumber;
+      state.user.phonenumber = action.payload.phonenumber;
     },
 
     changeDateOfBirth(state, action) {
-      state.dob = action.payload.dob;
+      state.user.dob = action.payload.dob;
     },
     changeAddress(state, action) {
-      state.address = action.payload.address;
+      state.user.address = action.payload.address;
     },
   },
   extraReducers: {
