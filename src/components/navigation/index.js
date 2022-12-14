@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-<<<<<<< HEAD:src/navigation/index.js
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UNSAFE_DataRouterStateContext, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user-reducer";
-=======
-import {Link} from "react-router-dom";
->>>>>>> arvind-search:src/components/navigation/index.js
+
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);

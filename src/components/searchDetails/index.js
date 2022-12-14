@@ -1,41 +1,49 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import HomeStockStrip from "../home/home-stock-strip";
+import StockStats from "./stock-stats";
+import StockComments from "./StockComments";
+import {createCommentThunk, findCommentsThunk} from "../../services/comments/comment-thunk";
+import {createStocksThunk} from "../../services/stocks/stock-thunk";
 
 const SearchDetails = () => {
+    const { state } = useLocation();
+    console.log("Parameters recevied :", state.stockDetails);
+    const stock = state.stockDetails
     const [user, setUser] = useState({});
+    const {currentStockId} = useSelector((state) => state.stocks)
     const location = useLocation()
     const navigate = useNavigate()
-    const stock = location.state.stockDetails
 
     //Load comments from store
-    /*const {comments} = useSelector((state) => state.comments)
-    let [newComment, setNewComment] = useState('');*/
+    const {comments} = useSelector((state) => state.comments)
+    let [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
 
     // Add a new comment
-    /*const newCommentHandler = () => {
+    const newCommentHandler = () => {
         const newCommentBody = {
-            songID: song.id,
+            stockID: currentStockId,
             comment: newComment,
             postedBy: "me"
         }
         dispatch(createCommentThunk(newCommentBody))
-    }*/
+    }
 
-   /* useEffect(() => {
-        dispatch(findCommentsThunk(song.id))
-    }, [])*/
+    useEffect(() => {
+        dispatch(createStocksThunk(stock))
+        dispatch(findCommentsThunk(currentStockId))
+    }, [])
 
-    /*useEffect(async () => {
+    useEffect(async () => {
         try {
             const user = await service.profile();
             setUser(user);
         } catch (e) {
             navigate('/login');
         }
-    }, []);*/
+    }, []);
     /*const logout = () => {
         service.logout()
             .then(() => navigate('/login'));
@@ -71,41 +79,42 @@ const SearchDetails = () => {
                         <br/>
                     </p>
                     <hr/>
-                    {/*<SongStats newComment={newComment}
+                    {/*{   currentStockId &&
+                        <StockStats newComment={newComment}
                                setNewComment={setNewComment}
                                newCommentHandler={newCommentHandler}
-                               songID={song.id}
-                    />*/}
+                               stockID={currentStockId}
+                    />}*/}
                     <hr/>
                 </div>
-                {/*{
+                {
                     comments.length > 0  &&
                     <div>
                         <div className="wd-grey-text">
                             Comments
                         </div>
                         <ul className="list-group">
-                            {
+                            {/*{   currentStockId &&
                                 comments.map((comment, index) =>
-                                    <SongComments
+                                    <StockComments
                                         key={comment._id}
                                         comment={comment}
                                         userID={"me"}
                                         user={user}
                                     />
                                 )
-                            }
+                            }*/}
                         </ul>
                     </div>
-                }*/}
-                {/*{
-                    comments.length === 0 &&
+                }
+                {
+                    /*comments.length === 0 &&*/
                     <div>
                         <div className="wd-grey-text">
                             No comments
                         </div>
                     </div>
-                }*/}
+                }
                 {/*<button
                     className="btn btn-primary text-white mt-3"
                     type="button"

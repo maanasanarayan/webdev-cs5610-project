@@ -1,29 +1,27 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-const SONGS_API = `${BASE_URL}/api/comments`;
+const BASE_URL = 'http://localhost:4000';
+const COMMENTS_API = `${BASE_URL}/comments`;
 
-const api = axios.create({
-    withCredentials: true
-});
+const api = axios
 
 export const findComments = (sid) => {
-    return api.get(`${SONGS_API}/${sid}`)
+    return api.get(`${COMMENTS_API}/${sid}`)
         .then(response => response.data);
 }
 
 export const addComment = async (newCommentBody) => {
-    const response = await api.post(`${SONGS_API}/${newCommentBody.postedBy}/song/${newCommentBody.songID}`,
+    const response = await api.post(`${COMMENTS_API}/${newCommentBody.postedBy}/stocks/${newCommentBody.songID}`,
         {comment : newCommentBody.comment})
     return response.data;
 }
 
 export const deleteComment = async (uid, cid) => {
-    await api.delete(`${SONGS_API}/${uid}/comment/${cid}`);
+    await api.delete(`${COMMENTS_API}/${uid}/comment/${cid}`);
     return cid
 }
 
 export const updateComment = async (uid, cid, comment) => {
-    await api.put(`${SONGS_API}/${uid}/comment/${cid}`, comment);
+    await api.put(`${COMMENTS_API}/${uid}/comment/${cid}`, comment);
     return comment
 }

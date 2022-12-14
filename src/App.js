@@ -5,6 +5,9 @@ import NavigationComponent from "./components/navigation";
 import newsReducer from "./reducers/news-reducer";
 import stockReducer from "./reducers/stocks-reducer";
 import userReducer from "./reducers/user-reducer";
+import commentReducer from "./components/reducers/comment-reducer";
+import likeReducer from "./components/reducers/like-reducer";
+import stocksReducer from "./components/reducers/stock-reducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import Login from "./pages/Login/Login";
@@ -22,7 +25,10 @@ const store = configureStore({
     news: newsReducer,
     stockdata: stockReducer,
     user: userReducer,
-    stocks: searchReducer
+    search: searchReducer,
+    comments: commentReducer,
+    likes: likeReducer,
+    stocks: stocksReducer
   },
 });
 

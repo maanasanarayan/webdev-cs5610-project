@@ -1,40 +1,26 @@
 import axios from "axios";
-import * as songService from "../songs/song-service";
+import * as stockService from "../stock-service";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = 'http://localhost:4000';
 
-const SONGS_API = `${BASE_URL}/api`;
+const STOCKS_API = `${BASE_URL}`;
 
-const api = axios.create({
-    withCredentials: true
-});
-
-export const findAllSongsLikedByUser = async (userId) => {
-    console.log("Inside findAllSongsLikedByUser");
-    const response = await api.get(`${SONGS_API}/users/${userId}/likes`)
-       /* .then(response => response.data)
-        .catch(e => {
-            console.log("Error in like-service, findAllSongsLikedByUser", e);
-            throw e;*/
-      /*  });*/
-    console.log("Service-Likes :", response)
-    const ans = await songService.searchForTitle(response.data);
-    console.log("Answer :+>", ans)
-    return ans;
-}
-
+const api = axios
 
 export const toggleLike = async (uid, sid) => {
-    const response = await api.put(`${SONGS_API}/users/${uid}/likes/${sid}`)
+    const response = await api.put(`${STOCKS_API}/users/${uid}/likes/${sid}`)
+    console.log("Inside toggleLike :", response)
     return response.data;
 }
 
 export const countHowManyLikes = async (sid) => {
-    const response = await api.get(`${SONGS_API}/songs/${sid}/likesCount`)
+    const response = await api.get(`${STOCKS_API}/stocks/${sid}/likesCount`)
+    console.log("Inside toggleLike :", response)
     return response.data;
 }
 
-export const findUserLikesSong = async (uid, sid) => {
-    const response = await api.get(`${SONGS_API}/users/${uid}/likes/${sid}`)
+export const findUserLikesStock = async (uid, sid) => {
+    const response = await api.get(`${STOCKS_API}/users/${uid}/likes/${sid}`)
+    console.log("Inside toggleLike :", response)
     return !!response.data;
 }

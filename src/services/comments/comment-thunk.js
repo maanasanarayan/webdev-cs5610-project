@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {addComment, findComments, deleteComment, updateComment} from "./comment-service";
 
-//Thunk to find all comments for a particular song
+//Thunk to find all comments for a particular stock
 export const findCommentsThunk = createAsyncThunk(
     'findComments', async (sid) => {
         return await findComments(sid);

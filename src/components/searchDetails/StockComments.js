@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {deleteCommentThunk, updateCommentThunk} from "../../services/comments/comment-thunk";
 import {useDispatch} from "react-redux";
 
-const SongComments = ({comment, userID, user}) => {
+const StockComments = ({comment, userID, user}) => {
 
     const [editMode, setEditMode] = useState(false);
     const commentID = String(comment._id)
@@ -85,4 +85,4 @@ const SongComments = ({comment, userID, user}) => {
         </li>
     )
 }
-export default SongComments;
+export default StockComments;

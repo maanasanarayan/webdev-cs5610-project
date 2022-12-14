@@ -1,20 +1,24 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
 import NavigationComponent from "../navigation";
 import {findStockBySearchTermThunk} from "../../services/search/search-thunk";
 import HomeStockStrip from "../home/home-stock-strip";
+import {createStocksThunk} from "../../services/stocks/stock-thunk";
+import {createStock} from "../../services/stocks/stock-service";
 
 const Search = () => {
     const [title, setTitle] = useState('');
-    const {stocks} = useSelector((state) => state.stocks)
-    console.log("Stocks are :", stocks)
+    const navigate = useNavigate()
+    const {search} = useSelector((state) => state.search)
+    console.log(" Searched Stocks are : ", search)
     const dispatch = useDispatch();
     const searchForStock = () => {
         dispatch(findStockBySearchTermThunk(title));
     }
     return(
         <div>
+            {console.log(" Searched Stocks are : ", search)}
             <HomeStockStrip />
             <h1>Search</h1>
             <div className="row">
@@ -33,15 +37,19 @@ const Search = () => {
                 <div className="col results-spacing">
                     <ul className="list-group">
                         {
-                            stocks && stocks.map(function(stock) {
+                            search && search.map(function(searchedStock) {
                                 return (
                                     <li className="list-group-item ">
                                         <div className="card album-artwork">
                                             <div className="card">
                                                 <div className="card-body">
-                                                    <Link to="/search-details" state={{stockDetails: stock}} className="card-title">
-                                                        <h5>{stock.instrument_name}</h5>
-                                                    </Link>
+                                                        <h5 onClick={
+                                                            () => {
+                                                                navigate("/search-details", {
+                                                                    state: { stockDetails: searchedStock }
+                                                                })
+                                                            }
+                                                        }>{searchedStock.instrument_name}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -50,7 +58,7 @@ const Search = () => {
                             })
                         }
                         {
-                            stocks && stocks.length === 0 &&
+                            search && search.length === 0 &&
                             <h4> No Results. </h4>
                         }
                     </ul>
