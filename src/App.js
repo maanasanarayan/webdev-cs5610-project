@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import HomeComponent from "./home";
 import NavigationComponent from "./navigation";
+
 import newsReducer from "./reducers/news-reducer";
 import stockReducer from "./reducers/stocks-reducer";
 import userReducer from "./reducers/user-reducer";
@@ -36,19 +37,18 @@ const store = configureStore({
 function App() {
   const user = localStorage.getItem("token");
 
-
   return (
     <>
       <BrowserRouter>
         <Provider store={store}>
           <NavigationComponent />
-          <div>
+          <div id="mainContainer">
             <Routes>
               <Route path="/*" element={<HomeComponent />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="profile" element={<ProfileComponent/>}/>
-              <Route path="bookmarks" element={<Bookmarks/>}/>
+              <Route path="profile" element={<ProfileComponent />} />
+              <Route path="bookmarks" element={<Bookmarks />} />
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
               <Route path="/search" element={<Search/>}/>
@@ -57,6 +57,7 @@ function App() {
           </div>
           <Footer />
         </Provider>
+
       </BrowserRouter>
     </>
   );

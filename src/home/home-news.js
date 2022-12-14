@@ -5,19 +5,20 @@ import {
   getNewsThunk,
   getRecommendedNewsThunk,
 } from "./../services/news-thunks";
-import { getAllUsersThunk } from "./../services/user-thunks";
+import { getAllUsersThunk, deleteUserThunk } from "./../services/user-thunks";
 
 const HomePageNews = () => {
   const { news, recommendedNews, loadingNews, loadingRecs } = useSelector(
     (state) => state.news
   );
-  const { user, loggedIn } = useSelector((state) => state.user);
+  const { user, loggedIn, allUsers, loading } = useSelector(
+    (state) => state.user
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsThunk());
-    console.log("----User----");
-    console.log(user);
+
     if (loggedIn && user.role === "TRADER") {
       dispatch(getRecommendedNewsThunk("AAPL"));
     } else if (loggedIn && user.role === "ADMIN") {
@@ -26,6 +27,10 @@ const HomePageNews = () => {
       dispatch(getRecommendedNewsThunk(user.username));
     }
   }, []);
+
+  const handleUserDelete = (userId) => {
+    dispatch(deleteUserThunk(userId));
+  };
 
   return (
     <>
@@ -49,7 +54,7 @@ const HomePageNews = () => {
       )}
       {loggedIn && user.role === "INDUSTRY" && (
         <>
-          <h2 className="mt-2">Industry News: </h2>
+          <h2 className="mt-2">You may be interested in: </h2>
           <div className="list-group m-4">
             {loadingRecs && <div className="list-group-item">Loading...</div>}
             {recommendedNews.map((n) => {
@@ -61,12 +66,37 @@ const HomePageNews = () => {
 
       {loggedIn && user.role === "ADMIN" && (
         <>
-          <h2 className="mt-2">Industry News: </h2>
+          <h2 className="mt-2">All existing Users: </h2>
           <div className="list-group m-4">
-            {loadingRecs && <div className="list-group-item">Loading...</div>}
-            {recommendedNews.map((n) => {
-              if (n.banner_image) return <NewsItem news={n} />;
-            })}
+            {loading && <div className="list-group-item">Loading...</div>}
+            {console.log(allUsers)}
+            {allUsers &&
+              allUsers.map((user) => {
+                if (user.role !== "ADMIN") {
+                  return (
+                    <div
+                      class="list-group-item row"
+                      style={{ display: "flex" }}
+                    >
+                      <div class="col-md-9 col-sm-12">
+                        <small className="text-secondary">{user.role}</small>
+                        <div>
+                          <b>{user.username}</b>
+                        </div>
+                        <div>{user.email}</div>
+                      </div>
+                      <div class="col-md-3 col-sm-12 text-center">
+                        <button
+                          class="btn btn-danger"
+                          onClick={() => handleUserDelete(user._id)}
+                        >
+                          Delete User
+                        </button>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
           </div>
         </>
       )}

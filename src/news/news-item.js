@@ -23,12 +23,6 @@ const NewsItem = ({ news }) => {
           >
             Read more
           </a>
-          <div
-            class="bottom-0 mb-3 position-absolute"
-            style={{ cursor: "pointer" }}
-          >
-            <i class="bi bi-bookmark me-2"></i>Bookmark
-          </div>
         </div>
       </div>
     </div>

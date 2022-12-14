@@ -17,19 +17,17 @@ const Login = () => {
     login(email, password).then((res) => {
       if (res.message === "Logged In") {
         dispatch(setLoggedInUser(res.userDetail));
-        navigate("../profile");
+        navigate("/");
       } else {
-
-          alert("Invalid credentials! Please enter valid credentials!");
-
+        alert("Invalid credentials! Please enter valid credentials!");
       }
     });
   };
 
   return (
-    <section className="vh-100 bg-light">
+    <section className="bg-light">
       <div className="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-    items-center h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
             <div className="card" style={{ borderRadius: "1rem" }}>
               <div class="row g-0">
