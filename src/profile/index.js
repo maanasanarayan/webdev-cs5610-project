@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from "react";
 import "./index.css";
-
+import { update } from "../services/user-service";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import "./index.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch,useStore } from "react-redux";
 import { useNavigate } from "react-router";
 import {
   changeFirstName,
@@ -15,8 +15,10 @@ import {
   changeDateOfBirth,
   changeAddress,
 } from "../reducers/user-reducer";
+import { setLoggedInUser } from "../reducers/user-reducer";
 
 const ProfileComponent = () => {
+  const store = useStore();
   const [file, setFile] = useState();
   useEffect(() => {
     // call api or anything
@@ -27,7 +29,7 @@ const ProfileComponent = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
   const { user, loggedIn } = useSelector((state) => state.user);
-  console.log(user);
+
   const navigate = useNavigate();
   let [isDisabled, setDisabled] = useState(true);
   function goToEditProfile(event) {
@@ -37,7 +39,7 @@ const ProfileComponent = () => {
 
   function disableEditProfile(event) {
     // navigate('../editProfile');
-    isDisabled = true;
+    setDisabled(true);
   }
 
   let [fname, setFirstName] = useState({ fname: user.fname });
@@ -58,7 +60,7 @@ const ProfileComponent = () => {
   let [phonenumber, setPhoneNumber] = useState({
     phonenumber: user.phonenumber,
   });
-  const nickNameChangeHandler = (event) => {
+  const phoneNumberChangeHandler = (event) => {
     const newPhoneNumber = {
       phonenumber: event.target.value,
     };
@@ -74,14 +76,14 @@ const ProfileComponent = () => {
   };
 
   let [dob, setDateOfBirth] = useState({ dob: user.dob });
-  const dateOfBirthChangeHandler = (event) => {
+  const dobChangeHandler = (event) => {
     const newDateOfBirth = {
       dob: event.target.value,
     };
     setDateOfBirth(newDateOfBirth);
   };
   let [address, setAddress] = useState({ address: user.address });
-  const locationChangeHandler = (event) => {
+  const addressChangeHandler = (event) => {
     const newAddress = {
       address: event.target.value,
     };
@@ -92,6 +94,7 @@ const ProfileComponent = () => {
 
   const saveProfile = (e) => {
     e.preventDefault();
+    
     dispatch(changeFirstName(fname));
     dispatch(changeLastName(lname));
     dispatch(changePhoneNumber(phonenumber));
@@ -99,6 +102,13 @@ const ProfileComponent = () => {
     dispatch(changeDateOfBirth(dob));
     dispatch(changeAddress(address));
     disableEditProfile();
+    update(store.getState().user.user).then((res) => {
+      if (res.message === "Updated User") {
+        alert("User Updated!")
+      } else {
+        alert("User not updated!");
+      }
+    });
   };
 
   function goToBookMarks() {
@@ -180,12 +190,12 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3" controlId="firstName">
               <Form.Label>First Name</Form.Label>
               <Form.Control
-                value={user.username}
+                value={fname.fname}
                 type="text"
                 disabled={isDisabled}
+                onChange={firstNameChangeHandler}
               />
               <Form.Text
-                value={user.username}
                 className="text-muted"
               ></Form.Text>
             </Form.Group>
@@ -195,9 +205,10 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3" controlId="lastName">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
-                value={user.lname}
+                value={lname.lname}
                 type="text"
                 disabled={isDisabled}
+                onChange={lastNameChangeHandler}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -208,10 +219,12 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3 formValues" controlId="firstName">
               <Form.Label>Gender</Form.Label>
               <Form.Control
-                value={user.gender}
+                value={gender.gender}
                 type="text"
                 disabled={isDisabled}
+                onChange={genderChangeHandler}
               />
+
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
           </div>
@@ -219,9 +232,10 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3" controlId="date">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
-                value={user.phonenumber}
+                value={phonenumber.phonenumber}
                 type="text"
                 disabled={isDisabled}
+                onChange={phoneNumberChangeHandler}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -233,9 +247,10 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3" controlId="date">
               <Form.Label>Date of Birth</Form.Label>
               <Form.Control
-                value={user.dob}
+                value={dob.dob}
                 type="date"
                 disabled={isDisabled}
+                onChange={dobChangeHandler}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -244,9 +259,10 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3" controlId="date">
               <Form.Label>Address</Form.Label>
               <Form.Control
-                value={user.address}
+                value={address.address}
                 type="text"
                 disabled={isDisabled}
+                onChange={addressChangeHandler}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -257,6 +273,7 @@ const ProfileComponent = () => {
             <button
               className="btn btn-secondary btn-block rounded-pill"
               onClick={saveProfile}
+              hidden ={isDisabled}
             >
               Save
             </button>
