@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+<<<<<<< HEAD:src/navigation/index.js
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UNSAFE_DataRouterStateContext, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user-reducer";
+=======
+import {Link} from "react-router-dom";
+>>>>>>> arvind-search:src/components/navigation/index.js
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
@@ -47,7 +51,7 @@ const NavigationComponent = () => {
             class="rounded-pill w-100 h-100 bg-light border-0 ps-3"
             placeholder="Search for companies"
           />
-          <i className="bi bi-search position-absolute text-dark wd-search-icon"></i>
+          <Link to={"/search"}><i className="bi bi-search position-absolute text-dark wd-search-icon"></i></Link>
         </div>
         <div className="col-md-1">
           <a onClick={dropdownToggle}>

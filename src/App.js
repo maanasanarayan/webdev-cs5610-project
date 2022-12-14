@@ -14,11 +14,22 @@ import UserDetails from "./pages/dashboard";
 import EditProfile from "./pages/editProfile";
 import ProfileComponent from "./profile";
 import Bookmarks from "./bookmarks";
+import HomeComponent from "./components/home";
+import NavigationComponent from "./components/navigation";
+import newsReducer from "./components/reducers/news-reducer";
+import stockReducer from "./components/reducers/stocks-reducer";
+import Footer from "./components/navigation/footer";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import Search from "./components/search";
+import SearchDetails from "./components/searchDetails";
+import searchReducer from "./components/search/search-reducer";
 const store = configureStore({
   reducer: {
     news: newsReducer,
     stockdata: stockReducer,
     user: userReducer,
+    stocks: searchReducer
   },
 });
 
@@ -40,6 +51,8 @@ function App() {
               <Route path="bookmarks" element={<Bookmarks/>}/>
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
+              <Route path="/search" element={<Search/>}/>
+              <Route path="/search-details" element={<SearchDetails/>}/>
             </Routes>
           </div>
           <Footer />
