@@ -3,7 +3,7 @@ const API_BASE = "http://localhost:4000";
 
 export const login = async (email, password) => {
   let body = { email, password };
-  let response = await axios.post(`${API_BASE}/login-user`, body);
+  let response = await axios.post(`${API_BASE}/login`, body);
   return response.data;
 };
 

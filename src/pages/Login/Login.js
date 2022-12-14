@@ -15,16 +15,13 @@ const Login = () => {
     e.preventDefault();
 
     login(email, password).then((res) => {
-      if (res.status === "ok") {
-        dispatch(setLoggedInUser(res.data));
-        navigate("/");
+      if (res.message === "Logged In") {
+        dispatch(setLoggedInUser(res.userDetail));
+        navigate("../profile");
       } else {
-        if (res.status === "error" && res.data === "User Not found") {
-          // Show the error
-          alert("User not found, please register");
-        } else {
-          alert("Invalid password. Try again");
-        }
+
+          alert("Invalid credentials! Please enter valid credentials!");
+
       }
     });
   };

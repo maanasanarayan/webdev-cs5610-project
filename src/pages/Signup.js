@@ -10,7 +10,7 @@ export default class SignUp extends Component {
       password: "",
       role: "",
       confirmpassword: "",
-      error: "",
+      error: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +24,7 @@ export default class SignUp extends Component {
     if (password !== confirmpassword) {
       alert("Passwords don't match");
     } else {
-      fetch("http://localhost:4000/register", {
+      fetch("http://localhost:4000/sign-up", {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -37,12 +37,18 @@ export default class SignUp extends Component {
           email,
           password,
           role,
-        }),
+          "lname":"none",
+          "fname":"none",
+          "gender":"none",
+          "dob":"none",
+          "phonenumber":"none",
+          "address":"none"
+        })
       })
         .then((res) => res.json())
         .then((data) => {
           console.log(data, "userRegister");
-          if (data.status === "ok") {
+          if (data.message === "Success") {
             alert("CONGRATS YOU ARE SUCCESSFULLY REGISTERED SIGNIN NOW");
             window.localStorage.setItem("token", data.data);
             window.location.href = "./sign-in";

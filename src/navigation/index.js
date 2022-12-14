@@ -20,6 +20,12 @@ const NavigationComponent = () => {
     setExpanded((e) => !e);
   };
 
+
+  function goToProfile(event) {
+
+    navigate('../profile');
+  }
+
   const handleLogout = () => {
     setExpanded(false);
     dispatch(logout());
@@ -46,7 +52,7 @@ const NavigationComponent = () => {
         <div className="col-md-1">
           <a onClick={dropdownToggle}>
             <span className="bg-light rounded-pill pt-2 pb-2 ps-2 pe-1">
-              <i class="bi bi-person-fill text-dark fs-4"></i>{" "}
+              <i class="bi bi-person-fill text-dark fs-4" onClick={goToProfile}></i>{" "}
             </span>
 
             {!expanded && <i class="bi bi-caret-down-fill text-white ms-2"></i>}
