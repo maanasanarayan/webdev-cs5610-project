@@ -1,7 +1,18 @@
 import React from "react";
+import HomePageBanner from "./home-banner";
+import HomeStockStrip from "./home-stock-strip";
+import HomePageNews from "./home-news";
 
 const HomeComponent = () => {
-  return <h1>Home</h1>;
+  return (
+    <>
+      <HomePageBanner />
+      <HomeStockStrip />
+      <div className="container">
+        <HomePageNews />
+      </div>
+    </>
+  );
 };
 
 export default HomeComponent;
