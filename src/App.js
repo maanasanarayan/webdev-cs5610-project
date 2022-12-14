@@ -1,14 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
-import HomeComponent from "./home";
-import NavigationComponent from "./navigation";
-
-import newsReducer from "./reducers/news-reducer";
-import stockReducer from "./reducers/stocks-reducer";
 import userReducer from "./reducers/user-reducer";
-import Footer from "./navigation/footer";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/Signup";
 import UserDetails from "./pages/dashboard";
