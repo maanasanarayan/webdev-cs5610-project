@@ -25,19 +25,18 @@ const store = configureStore({
 function App() {
   const user = localStorage.getItem("token");
 
-
   return (
     <>
       <BrowserRouter>
         <Provider store={store}>
           <NavigationComponent />
-          <div>
+          <div id="mainContainer">
             <Routes>
               <Route path="/*" element={<HomeComponent />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="profile" element={<ProfileComponent/>}/>
-              <Route path="bookmarks" element={<Bookmarks/>}/>
+              <Route path="profile" element={<ProfileComponent />} />
+              <Route path="bookmarks" element={<Bookmarks />} />
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
             </Routes>
