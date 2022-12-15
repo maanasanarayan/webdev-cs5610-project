@@ -20,6 +20,9 @@ import commentReducer from "./reducers/comment-reducer";
 import likeReducer from "./reducers/like-reducer";
 import stocksReducer from "./reducers/stock-reducer";
 import stockReducer from "./reducers/stocks-reducer";
+import ProfileComponentAdmin from "./profile/profilepages/admin";
+import ProfileComponentCompany from "./profile/profilepages/comapny";
+
 const store = configureStore({
   reducer: {
     news: newsReducer,
@@ -41,15 +44,17 @@ function App() {
       <BrowserRouter>
         <Provider store={store}>
           <NavigationComponent />
-          <div>
+          <div id="mainContainer">
             <Routes>
+              <Route path="/*" element={<HomeComponent />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="profile" element={<ProfileComponent/>}/>
-              <Route path="bookmarks" element={<Bookmarks/>}/>
+              <Route path="profile" element={<ProfileComponent />} />
+              <Route path="bookmarks" element={<Bookmarks />} />
+              <Route path="/profileadmin" element={<ProfileComponentAdmin/>}/>
+              <Route path="/profilecompany" element={<ProfileComponentCompany/>}/>
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
-              <Route path="/" element={<HomeComponent />} />
               <Route path="/search" element={<Search/>}/>
               <Route path="/search-details" element={<SearchDetails/>}/>
             </Routes>

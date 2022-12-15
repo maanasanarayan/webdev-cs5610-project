@@ -7,8 +7,20 @@ export const login = async (email, password) => {
   return response.data;
 };
 
-export const getAllUsers = async (email, password) => {
-  let response = await axios.get(`${API_BASE}/getUsers`);
+export const update = async ( updatedUser) => {
+  let body = { user:updatedUser};
+  let response = await axios.put(`${API_BASE}/users/update`, body);
+  return response.data;
+};
+
+export const getAllUsers = async () => {
+  let response = await axios.get(`${API_BASE}/users`);
+  return response.data;
+};
+
+export const deleteUser = async (userId) => {
+  let response = await axios.delete(`${API_BASE}/users/${userId}`);
+  console.log("Deleting user: ", userId);
   console.log(response);
   return response.data;
 };
