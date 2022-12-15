@@ -6,7 +6,6 @@ import { UNSAFE_DataRouterStateContext, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../reducers/user-reducer";
 
-
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
   const { user, loggedIn } = useSelector((state) => state.user);
@@ -35,14 +34,20 @@ const NavigationComponent = () => {
             <h3 className="wd-logo">NEUStockTrade</h3>
           </Link>
         </div>
-        <div className="col-md-5"></div>
-        <div className="col-md-3 position-relative">
-          <input
+        <div className="col-md-7"></div>
+        <div className="col-md-1 pt-1">
+          {/* <input
             type="text"
             class="rounded-pill w-100 h-100 bg-light border-0 ps-3"
             placeholder="Search for companies"
-          />
-          <Link to={"/search"}><i className="bi bi-search position-absolute text-dark wd-search-icon"></i></Link>
+          /> */}
+          <Link
+            to={"/search"}
+            className="fs-5 mt-2 text-decoration-none text-light"
+          >
+            <i className="bi bi-search me-2 text-light"></i>
+            Search
+          </Link>
         </div>
         <div className="col-md-1">
           <a onClick={dropdownToggle}>
