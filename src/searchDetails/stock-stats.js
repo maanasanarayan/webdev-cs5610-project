@@ -35,7 +35,7 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
                         onClick={() => likeStock(stockID)}>
                     </button>
                     <span className="wd-icons-text">
-                        {likesCount}
+                        {likesCount.count}
                     </span>
                 </div>
                 <div className="col-6 text-center">

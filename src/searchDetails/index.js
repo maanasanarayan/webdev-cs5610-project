@@ -19,9 +19,8 @@ const SearchDetails = () => {
     const navigate = useNavigate()
 
     //Load comments from store
-    console.log("From store ---- Comments :", state.comments)
-    const comm = useSelector((state) => state.comments)
-    const comments =[]
+    const {comments} = useSelector((state) => state.comments)
+    console.log("From store ---- Comments :", comments)
     let [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
 
@@ -35,10 +34,17 @@ const SearchDetails = () => {
         dispatch(createCommentThunk(newCommentBody))
     }
 
-    useEffect(() => {
+    useEffect( () => {
         dispatch(createStocksThunk(stock))
-        dispatch(findCommentsThunk(currentStockId))
     }, [])
+
+    useEffect(() => {
+        if (currentStockId) {
+            console.log("Reached. Going to dispatch comments! ", currentStockId)
+            dispatch(findCommentsThunk(currentStockId))
+        }
+        }, [currentStockId]
+    )
 
     useEffect( () => {
         if (user) {
