@@ -21,3 +21,10 @@ export const findUserLikesStock = async (uid, sid) => {
     const response = await api.get(`${STOCKS_API}/users/${uid}/likes/${sid}`)
     return !!response.data;
 }
+
+export const findAllStocksLikedByUser = async (userId) => {
+    console.log("Inside findAllStocksLikedByUser");
+    const response = await api.get(`${STOCKS_API}/users/${userId}/likes`)
+    return response.data;
+}
+

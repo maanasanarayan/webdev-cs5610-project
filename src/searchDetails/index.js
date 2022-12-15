@@ -7,6 +7,7 @@ import {profile} from "../services/user-service";
 import StockComments from "./StockComments";
 import {createCommentThunk, findCommentsThunk} from "../services/comments/comment-thunk";
 import {createStocksThunk} from "../services/stocks/stock-thunk";
+import {findAllStocksLikedByUser} from "../services/likes/like-service"
 
 const SearchDetails = () => {
     const { state } = useLocation();
@@ -68,6 +69,7 @@ const SearchDetails = () => {
     return(
         <div>
             <HomeStockStrip />
+            {user && findAllStocksLikedByUser(user._id)}
             <div className="p-2">
                 <div className="mb-2 position-relative">
                 </div>
