@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {countHowManyLikesThunk, findUserLikesStockThunk, toggleLikeThunk} from "../services/likes/like-thunk";
+import {countHowManyCommentsThunk} from "../services/comments/comment-thunk";
 
 const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => {
     const { user, loggedIn } = useSelector((state) => state.user);
@@ -9,9 +10,11 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
     const userId = user._id
     const likesCount = useSelector((state) => state.likes.likes.count)
     const isStockLiked = useSelector((state) => state.likes.likes.userLiked)
+    const {comments} = useSelector((state) => state.comments)
     const dispatch = useDispatch();
     useEffect( () => {
             dispatch(countHowManyLikesThunk(stockID))
+            dispatch(countHowManyCommentsThunk(stockID))
             dispatch(findUserLikesStockThunk({userId, stockID}))
         }, []
     )
@@ -20,6 +23,8 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
 
     //Like a song
     const likeStock = (stockID) => {
+        console.log("inside like stock, user id", userId)
+        console.log("inside like stock, stock id", stockID)
         dispatch(toggleLikeThunk({userId, stockID}))
     }
 
@@ -35,14 +40,14 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
                         onClick={() => likeStock(stockID)}>
                     </button>
                     <span className="wd-icons-text">
-                        {likesCount.count}
+                        {likesCount}
                     </span>
                 </div>
                 <div className="col-6 text-center">
                     <button onClick={ () => setShowCommentBox(!showCommentBox)}
                             className="fa-regular bi bi-chat wd-grey-text wd-icon-button"></button>
                     <span className="wd-icons-text" >
-                        234
+                        {comments.length}
                     </span>
                 </div>
             </div>

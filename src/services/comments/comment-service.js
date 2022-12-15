@@ -12,7 +12,7 @@ export const findComments = (sid) => {
 }
 
 export const addComment = async (newCommentBody) => {
-    const response = await api.post(`${COMMENTS_API}/${newCommentBody.postedBy}/stocks/${newCommentBody.songID}`,
+    const response = await api.post(`${COMMENTS_API}/${newCommentBody.postedBy}/stocks/${newCommentBody.stockID}`,
         {comment : newCommentBody.comment})
     return response.data;
 }
@@ -25,4 +25,9 @@ export const deleteComment = async (uid, cid) => {
 export const updateComment = async (uid, cid, comment) => {
     await api.put(`${COMMENTS_API}/${uid}/comment/${cid}`, comment);
     return comment
+}
+
+export const countHowManyComments= async (sid) => {
+    const response = await api.get(`${COMMENTS_API}/${sid}/commentsCount`)
+    return response.data;
 }

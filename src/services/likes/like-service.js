@@ -9,18 +9,15 @@ const api = axios
 
 export const toggleLike = async (uid, sid) => {
     const response = await api.put(`${STOCKS_API}/users/${uid}/likes/${sid}`)
-    console.log("Inside toggleLike :", response)
     return response.data;
 }
 
 export const countHowManyLikes = async (sid) => {
     const response = await api.get(`${STOCKS_API}/stocks/${sid}/likesCount`)
-    console.log("Inside toggleLike :", response)
     return response.data;
 }
 
 export const findUserLikesStock = async (uid, sid) => {
     const response = await api.get(`${STOCKS_API}/users/${uid}/likes/${sid}`)
-    console.log("Inside toggleLike :", response)
     return !!response.data;
 }
