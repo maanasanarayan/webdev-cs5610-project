@@ -17,6 +17,8 @@ import { Provider } from "react-redux";
 import Search from "./components/search";
 import SearchDetails from "./components/searchDetails";
 import searchReducer from "./components/search/search-reducer";
+import ProfileComponentAdmin from "./profile/profilepages/admin";
+import ProfileComponentCompany from "./profile/profilepages/comapny";
 const store = configureStore({
   reducer: {
     news: newsReducer,
@@ -41,6 +43,10 @@ function App() {
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="profile" element={<ProfileComponent />} />
               <Route path="bookmarks" element={<Bookmarks />} />
+              <Route path="/profileadmin" element={<ProfileComponentAdmin/>}/>
+              <Route path="/profilecompany" element={<ProfileComponentCompany/>}/>
+              
+
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
               <Route path="/search" element={<Search/>}/>
