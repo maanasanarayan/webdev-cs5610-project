@@ -1,10 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import * as service from "./user-service";
+import {getAllUsers, deleteUser} from "./user-service";
 
 export const getAllUsersThunk = createAsyncThunk(
   "allUsers/getAllUsers",
   async () => {
-    let users = await service.getAllUsers();
+    let users = await getAllUsers();
     return users;
   }
+);
+
+export const deleteUserThunk = createAsyncThunk(
+    "users/deleteUser",
+    async (userId) => {
+        await deleteUser(userId);
+        return userId;
+    }
 );

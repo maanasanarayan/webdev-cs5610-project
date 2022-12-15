@@ -3,7 +3,7 @@ import {
     countHowManyLikesThunk, findAllStocksLikedByUserThunk,
     findUserLikesStockThunk,
     toggleLikeThunk
-} from "../../services/likes/like-thunk";
+} from "../services/likes/like-thunk";
 
 const initialState = {
     likes: {

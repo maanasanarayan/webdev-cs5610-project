@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {deleteCommentThunk, updateCommentThunk} from "../../services/comments/comment-thunk";
+import {deleteCommentThunk, updateCommentThunk} from "../services/comments/comment-thunk";
 import {useDispatch} from "react-redux";
 
 const StockComments = ({comment, userID, user}) => {

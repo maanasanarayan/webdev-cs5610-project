@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createStocksThunk, deleteStockThunk, findAllStockThunk} from "../../services/stocks/stock-thunk";
+import {createStocksThunk, deleteStockThunk, findAllStockThunk} from "../services/stocks/stock-thunk";
 
 const initialState = {
     stocks: [],

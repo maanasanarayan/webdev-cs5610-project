@@ -6,6 +6,7 @@ const COMMENTS_API = `${BASE_URL}/comments`;
 const api = axios
 
 export const findComments = (sid) => {
+    console.log("Stock-ID -=>", sid)
     return api.get(`${COMMENTS_API}/${sid}`)
         .then(response => response.data);
 }

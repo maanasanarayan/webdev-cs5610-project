@@ -12,3 +12,14 @@ export const getAllUsers = async (email, password) => {
   console.log(response);
   return response.data;
 };
+
+export const profile = () =>
+    axios.post(`${API_BASE}/profile`)
+        .then(response => response.data);
+
+export const deleteUser = async (userId) => {
+    let response = await axios.delete(`${API_BASE}/users/${userId}`);
+    console.log("Deleting user: ", userId);
+    console.log(response);
+    return response.data;
+};

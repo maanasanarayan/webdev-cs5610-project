@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findStockBySearchTerm} from "../../services/search/search-service";
-import {findStockBySearchTermThunk} from "../../services/search/search-thunk";
+import {findStockBySearchTerm} from "../services/search/search-service";
+import {findStockBySearchTermThunk} from "../services/search/search-thunk";
 
 const initialState = {
     search: [],

@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {countHowManyLikesThunk, findUserLikesStockThunk, toggleLikeThunk} from "../../services/likes/like-thunk";
+import {countHowManyLikesThunk, findUserLikesStockThunk, toggleLikeThunk} from "../services/likes/like-thunk";
 
 const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => {
-    const userId = "me"
+    const { user, loggedIn } = useSelector((state) => state.user);
     const [showCommentBox, setShowCommentBox] = useState(false);
-
+    console.log("Inside the Stock Stats, checking which user :", user)
+    const userId = user._id
     const likesCount = useSelector((state) => state.likes.likes.count)
     const isStockLiked = useSelector((state) => state.likes.likes.userLiked)
     const dispatch = useDispatch();
@@ -28,8 +29,8 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
                 <div className="col-6 text-center">
                     <button
                         className= {isStockLiked ?
-                            "fa-solid fa-heart wd-heart wd-icon-button" :
-                            "fa-regular fa-heart wd-grey-text wd-heart wd-icon-button"}
+                            "bi bi-hand-thumbs-up wd-heart wd-icon-button" :
+                            "bi bi-hand-thumbs-up wd-grey-text wd-heart wd-icon-button"}
                         style={{color: isStockLiked ? 'red': ''}}
                         onClick={() => likeStock(stockID)}>
                     </button>
@@ -39,7 +40,7 @@ const StockStats = ({newComment, setNewComment, newCommentHandler, stockID}) => 
                 </div>
                 <div className="col-6 text-center">
                     <button onClick={ () => setShowCommentBox(!showCommentBox)}
-                            className="fa-regular fa-comment wd-grey-text wd-icon-button"></button>
+                            className="fa-regular bi bi-chat wd-grey-text wd-icon-button"></button>
                     <span className="wd-icons-text" >
                         234
                     </span>

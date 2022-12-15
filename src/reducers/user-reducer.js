@@ -16,6 +16,7 @@ const userSlice = createSlice({
   reducers: {
     setLoggedInUser(state, action) {
       state = { loggedIn: true, user: action.payload };
+      console.log("INSIDE USER REDUCER ====> ", state.user)
       return state;
     },
     logout(state, action) {

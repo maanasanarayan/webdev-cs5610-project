@@ -3,21 +3,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import HomeStockStrip from "../home/home-stock-strip";
 import StockStats from "./stock-stats";
+import {profile} from "../services/user-service";
 import StockComments from "./StockComments";
-import {createCommentThunk, findCommentsThunk} from "../../services/comments/comment-thunk";
-import {createStocksThunk} from "../../services/stocks/stock-thunk";
+import {createCommentThunk, findCommentsThunk} from "../services/comments/comment-thunk";
+import {createStocksThunk} from "../services/stocks/stock-thunk";
 
 const SearchDetails = () => {
     const { state } = useLocation();
     console.log("Parameters recevied :", state.stockDetails);
     const stock = state.stockDetails
-    const [user, setUser] = useState({});
+    const { user, loggedIn } = useSelector((state) => state.user);
+    console.log("=====>>>>Currently logged in user is :", user)
     const {currentStockId} = useSelector((state) => state.stocks)
     const location = useLocation()
     const navigate = useNavigate()
 
     //Load comments from store
-    const {comments} = useSelector((state) => state.comments)
+    console.log("From store ---- Comments :", state.comments)
+    const comm = useSelector((state) => state.comments)
+    const comments =[]
     let [newComment, setNewComment] = useState('');
     const dispatch = useDispatch();
 
@@ -26,7 +30,7 @@ const SearchDetails = () => {
         const newCommentBody = {
             stockID: currentStockId,
             comment: newComment,
-            postedBy: "me"
+            postedBy: user._id
         }
         dispatch(createCommentThunk(newCommentBody))
     }
@@ -36,12 +40,11 @@ const SearchDetails = () => {
         dispatch(findCommentsThunk(currentStockId))
     }, [])
 
-    useEffect(async () => {
-        try {
-            const user = await service.profile();
-            setUser(user);
-        } catch (e) {
-            navigate('/login');
+    useEffect( () => {
+        if (user) {
+            console.log("inside useEffect : User is ", user)
+        } else {
+            navigate('/sign-in')
         }
     }, []);
     /*const logout = () => {
@@ -53,7 +56,7 @@ const SearchDetails = () => {
     /*const artists = song.artists.join(', ')
     const minutes = Math.floor(song.songDurationInMs / 60000);
     const seconds = ((song.songDurationInMs % 60000) / 1000).toFixed(0);
-    const duration = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    const duration = minutes + ":" + (seΩconds < 10 ? '0' : '') + seconds;
     const releaseYear = dateFormat(song.releaseYear+"T08:59:00.000Z", "mmmm dS, yyyy")*/
 
     return(
@@ -79,12 +82,13 @@ const SearchDetails = () => {
                         <br/>
                     </p>
                     <hr/>
-                    {/*{   currentStockId &&
+                    {console.log("Current stock id", currentStockId)}
+                    {   currentStockId &&
                         <StockStats newComment={newComment}
                                setNewComment={setNewComment}
                                newCommentHandler={newCommentHandler}
                                stockID={currentStockId}
-                    />}*/}
+                    />}
                     <hr/>
                 </div>
                 {
@@ -94,7 +98,7 @@ const SearchDetails = () => {
                             Comments
                         </div>
                         <ul className="list-group">
-                            {/*{   currentStockId &&
+                            {   currentStockId &&
                                 comments.map((comment, index) =>
                                     <StockComments
                                         key={comment._id}
@@ -103,12 +107,12 @@ const SearchDetails = () => {
                                         user={user}
                                     />
                                 )
-                            }*/}
+                            }
                         </ul>
                     </div>
                 }
                 {
-                    /*comments.length === 0 &&*/
+                    comments.length === 0 &&
                     <div>
                         <div className="wd-grey-text">
                             No comments

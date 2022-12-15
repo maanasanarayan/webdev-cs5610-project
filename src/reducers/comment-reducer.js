@@ -4,7 +4,7 @@ import {
     deleteCommentThunk,
     findCommentsThunk,
     updateCommentThunk
-} from "../../services/comments/comment-thunk";
+} from "../services/comments/comment-thunk";
 
 const initialState = {
     comments: [],

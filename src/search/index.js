@@ -2,10 +2,10 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useState} from "react";
 import NavigationComponent from "../navigation";
-import {findStockBySearchTermThunk} from "../../services/search/search-thunk";
+import {findStockBySearchTermThunk} from "../services/search/search-thunk";
 import HomeStockStrip from "../home/home-stock-strip";
-import {createStocksThunk} from "../../services/stocks/stock-thunk";
-import {createStock} from "../../services/stocks/stock-service";
+import {createStocksThunk} from "../services/stocks/stock-thunk";
+import {createStock} from "../services/stocks/stock-service";
 
 const Search = () => {
     const [title, setTitle] = useState('');
@@ -18,7 +18,6 @@ const Search = () => {
     }
     return(
         <div>
-            {console.log(" Searched Stocks are : ", search)}
             <HomeStockStrip />
             <h1>Search</h1>
             <div className="row">
