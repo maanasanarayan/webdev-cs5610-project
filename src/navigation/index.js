@@ -23,6 +23,7 @@ const NavigationComponent = () => {
   const handleLogout = () => {
     setExpanded(false);
     dispatch(logout());
+    navigate("/");
     window.location.reload();
   };
 

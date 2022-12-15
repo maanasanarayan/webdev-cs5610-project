@@ -14,7 +14,7 @@ export const countHowManyLikesThunk = createAsyncThunk(
 //Thunk to create a new like
 export const toggleLikeThunk = createAsyncThunk(
     'toggleLike', async(LikeObject) => {
-        return await toggleLike(LikeObject.userId, LikeObject.songID);
+        return await toggleLike(LikeObject.userId, LikeObject.stockID);
     }
 )
 

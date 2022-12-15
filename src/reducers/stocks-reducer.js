@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getStockDataThunk } from "./../services/stock-thunks";
+import {
+  getStockDataThunk,
+  getStockDetailsThunk,
+  resetStockDetailsThunk,
+} from "./../services/stock-thunks";
 
 const initialState = {
   stockdata: [],
+  currentStockDetails: null,
   loading: false,
 };
 
@@ -20,6 +25,16 @@ const stockSlice = createSlice({
     },
     [getStockDataThunk.rejected]: (state) => {
       state.loading = false;
+    },
+    [getStockDetailsThunk.pending]: (state) => {},
+    [getStockDetailsThunk.fulfilled]: (state, { payload }) => {
+      state.currentStockDetails = payload;
+    },
+    [getStockDetailsThunk.rejected]: (state) => {
+      console.log("Error getting Stock Details");
+    },
+    [resetStockDetailsThunk.fulfilled]: (state, { payload }) => {
+      state.currentStockDetails = null;
     },
   },
 });

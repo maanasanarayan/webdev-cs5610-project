@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {addComment, findComments, deleteComment, updateComment} from "./comment-service";
+import {addComment, findComments, deleteComment, updateComment, countHowManyComments} from "./comment-service";
 
 //Thunk to find all comments for a particular stock
 export const findCommentsThunk = createAsyncThunk(
@@ -25,3 +25,9 @@ export const updateCommentThunk = createAsyncThunk(
     'updateComment', async (updateObject) =>
         await updateComment(updateObject.userID, updateObject.commentID, updateObject.commentObject)
     )
+
+export const countHowManyCommentsThunk = createAsyncThunk(
+    'countHowManyComments', async (sid) => {
+        return await countHowManyComments(sid);
+    }
+)

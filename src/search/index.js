@@ -52,6 +52,7 @@ const Search = () => {
                           <div className="card-body">
                             <h5
                               onClick={() => {
+                                dispatch(createStocksThunk(searchedStock));
                                 navigate("/search-details", {
                                   state: { stockDetails: searchedStock },
                                 });
