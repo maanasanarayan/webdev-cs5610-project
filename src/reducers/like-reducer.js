@@ -4,6 +4,7 @@ import {
   findAllStocksLikedByUserThunk,
   findUserLikesStockThunk,
   toggleLikeThunk,
+  resetLikesThunk,
 } from "../services/likes/like-thunk";
 
 const initialState = {
@@ -30,6 +31,10 @@ const likeReducer = createSlice({
     [toggleLikeThunk.fulfilled]: (state, action) => {
       state.likes.count = action.payload.count;
       state.likes.userLiked = action.payload.userLiked;
+    },
+    [resetLikesThunk.fulfilled]: (state, action) => {
+      state.likes.count = 0;
+      state.likes.userLiked = false;
     },
   },
 });

@@ -4,6 +4,7 @@ import {
   countHowManyLikesThunk,
   findUserLikesStockThunk,
   toggleLikeThunk,
+  resetLikesThunk,
 } from "../services/likes/like-thunk";
 import { countHowManyCommentsThunk } from "../services/comments/comment-thunk";
 
@@ -22,6 +23,7 @@ const StockStats = ({
   const { comments } = useSelector((state) => state.comments);
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetLikesThunk());
     dispatch(countHowManyLikesThunk(stockID));
     dispatch(countHowManyCommentsThunk(stockID));
     dispatch(findUserLikesStockThunk({ userId, stockID }));
@@ -42,10 +44,9 @@ const StockStats = ({
           <button
             className={
               isStockLiked
-                ? "bi bi-hand-thumbs-up wd-heart wd-icon-button"
+                ? "bi bi-hand-thumbs-up-fill text-info wd-icon-button"
                 : "bi bi-hand-thumbs-up wd-grey-text wd-heart wd-icon-button"
             }
-            style={{ color: isStockLiked ? "red" : "" }}
             onClick={() => likeStock(stockID)}
           ></button>
           <span className="wd-icons-text ms-2">{likesCount}</span>

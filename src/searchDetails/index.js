@@ -8,6 +8,7 @@ import StockComments from "./StockComments";
 import {
   createCommentThunk,
   findCommentsThunk,
+  resetCommentsThunk,
 } from "../services/comments/comment-thunk";
 import {
   getStockDetailsThunk,
@@ -43,6 +44,7 @@ const SearchDetails = () => {
   };
 
   useEffect(() => {
+    dispatch(resetCommentsThunk());
     if (currentStockId) {
       console.log("Reached. Going to dispatch comments! ", currentStockId);
       dispatch(findCommentsThunk(currentStockId));
@@ -164,8 +166,8 @@ const SearchDetails = () => {
         </div>
         {comments.length > 0 && (
           <div>
-            <div className="wd-grey-text">Comments</div>
-            <ul className="list-group">
+            <div className="wd-grey-text h6 mb-3">Comments</div>
+            <ul className="list-group mb-4">
               {currentStockId &&
                 comments.map((comment, index) => (
                   <StockComments
@@ -178,11 +180,11 @@ const SearchDetails = () => {
             </ul>
           </div>
         )}
-        {comments.length === 0 && (
+        {/* {comments.length === 0 && (
           <div>
             <div className="wd-grey-text">No comments</div>
           </div>
-        )}
+        )} */}
         {/*<button
                     className="btn btn-primary text-white mt-3"
                     type="button"
