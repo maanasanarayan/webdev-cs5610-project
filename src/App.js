@@ -15,10 +15,6 @@ import UserDetails from "./pages/dashboard";
 import EditProfile from "./pages/editProfile";
 import ProfileComponent from "./profile";
 import Bookmarks from "./bookmarks";
-import Footer from "./navigation/footer";
-import newsReducer from "./reducers/news-reducer";
-import userReducer from "./reducers/user-reducer";
-import stockReducer from "./reducers/stocks-reducer";
 import ProfileComponentAdmin from "./profile/profilepages/admin";
 import ProfileComponentCompany from "./profile/profilepages/comapny";
 
