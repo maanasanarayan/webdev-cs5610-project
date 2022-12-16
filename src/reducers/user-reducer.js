@@ -40,8 +40,26 @@ const userSlice = createSlice({
       state.user.dob = action.payload.dob;
     },
     changeAddress(state, action) {
+      console.log("addding bookmark in reducer");
       state.user.address = action.payload.address;
     },
+    addBookmark(state, action) {
+      console.log("addding bookmark in reducer");
+     
+      state.user.bookMarks.push(action.payload);
+     
+    },
+    deleteBookmark(state, action) {
+      const index = action.payload
+      console.log(index);
+      state.user.bookMarks.splice(index, 1)
+    },
+   
+    // todoDoneToggle(state, action) {
+    //   const todo = state.find((todo) =>
+    //         todo._id === action.payload._id)
+    //   todo.done = !todo.done
+    // }
   },
   extraReducers: {
     [getAllUsersThunk.pending]: (state) => {
@@ -71,5 +89,8 @@ export const {
   changeLastName,
   changeDateOfBirth,
   changePhoneNumber,
+  changeBookmarks,
+  addBookmark,
+  deleteBookmark,
 } = userSlice.actions;
 export default userSlice.reducer;
