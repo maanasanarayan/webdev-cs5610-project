@@ -31,6 +31,14 @@ export const deleteUser = async (userId) => {
   return response.data;
 };
 
+export const findUserById = async (userId) => {
+  console.log("Reached findUserById!")
+  const response = await axios.get(`${API_BASE}/users/${userId}`);
+  console.log("Response from findUserById :", response.data)
+  return response.data;
+}
+
 export const profile = () =>
     axios.post(`${API_BASE}/profile`)
         .then(response => response.data);
+

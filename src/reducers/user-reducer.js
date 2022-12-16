@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsersThunk, deleteUserThunk } from "./../services/user-thunks";
+import {getAllUsersThunk, deleteUserThunk, findUserByIdThunk} from "./../services/user-thunks";
 
 const initialState = {
   loading: false,
@@ -8,6 +8,15 @@ const initialState = {
   user: {
     role: "ANONYMOUS",
   },
+  publicUser: {
+    fname : "",
+    lname : "",
+    gender : "",
+    phonenumber : "",
+    dob : "",
+    address : "",
+    bookmarks : []
+  }
 };
 
 const userSlice = createSlice({
@@ -15,7 +24,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setLoggedInUser(state, action) {
-      state = { loggedIn: true, user: action.payload };
+      state = { ...state, loggedIn: true, user: action.payload };
       console.log("INSIDE USER REDUCER ====> ", state.user)
       return state;
     },
@@ -45,7 +54,6 @@ const userSlice = createSlice({
     },
     addBookmark(state, action) {
       console.log("addding bookmark in reducer");
-     
       state.user.bookMarks.push(action.payload);
      
     },
@@ -77,6 +85,21 @@ const userSlice = createSlice({
       state.loading = false;
       state.allUsers = state.allUsers.filter((u) => u._id !== payload);
     },
+    [findUserByIdThunk.fulfilled]: (state, {payload}) => {
+      state.loading = false
+      state.publicUser = payload
+    },
+    [findUserByIdThunk.pending]: (state, {payload}) => {
+      console.log("Inside findUserById pending thunk", payload);
+      state.loading = false
+      state.publicUser = {}
+    },
+    [findUserByIdThunk.rejected]: (state, {payload}) => {
+      console.log("Inside findUserById rejected thunk", payload);
+      state.loading = false
+      state.publicUser = payload
+    }
+
   },
 });
 

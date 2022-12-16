@@ -16,3 +16,10 @@ export const deleteUserThunk = createAsyncThunk(
     return userId;
   }
 );
+
+export const findUserByIdThunk = createAsyncThunk(
+    "findUserById",
+    async (userId) => {
+        return await service.findUserById(userId);
+    }
+);

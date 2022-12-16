@@ -23,6 +23,7 @@ import searchReducer from "./search/search-reducer";
 import commentReducer from "./reducers/comment-reducer";
 import likeReducer from "./reducers/like-reducer";
 import stocksReducer from "./reducers/stock-reducer";
+import PublicProfile from "./profile/publicProfile";
 
 const store = configureStore({
   reducer: {
@@ -55,6 +56,7 @@ function App() {
               <Route path="bookmarks" element={<Bookmarks />} />
               <Route path="/profileadmin" element={<ProfileComponentAdmin/>}/>
               <Route path="/profilecompany" element={<ProfileComponentCompany/>}/>
+              <Route path="/profile/:uid" element={<PublicProfile/>}/>
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
               <Route path="/search" element={<Search/>}/>

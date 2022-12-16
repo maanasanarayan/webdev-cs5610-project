@@ -18,7 +18,6 @@ const HomePageNews = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getNewsThunk());
-
     if (loggedIn && user.role === "TRADER") {
       dispatch(getRecommendedNewsThunk("AAPL"));
     } else if (loggedIn && user.role === "ADMIN") {
