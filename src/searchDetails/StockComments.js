@@ -34,12 +34,17 @@ const StockComments = ({ comment, userID, user }) => {
     const commentObject = edit.comment;
     dispatch(updateCommentThunk({ userID, commentID, commentObject }));
   };
-  console.log("===>COMMENT OBJECT",comment);
+  console.log("===>COMMENT OBJECT", comment);
   return (
     <li className="list-group-item">
       <div className="row">
         <div className="col-10">
-          <b className="wd-float-left me-2">{comment.postedBy.username}</b>
+          {!comment.postedBy.username && (
+            <b className="wd-float-left me-2">{user.username}</b>
+          )}
+          {comment.postedBy.username && (
+            <b className="wd-float-left me-2">{comment.postedBy.username}</b>
+          )}
           <span className="wd-float-left wd-grey-text wd-post-summary-spacing text-secondary">
             • {commentDate}
           </span>

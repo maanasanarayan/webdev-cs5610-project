@@ -7,6 +7,7 @@ import {
   resetLikesThunk,
 } from "../services/likes/like-thunk";
 import { countHowManyCommentsThunk } from "../services/comments/comment-thunk";
+import { useNavigate } from "react-router-dom";
 
 const StockStats = ({
   newComment,
@@ -22,6 +23,8 @@ const StockStats = ({
   const isStockLiked = useSelector((state) => state.likes.likes.userLiked);
   const { comments } = useSelector((state) => state.comments);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(resetLikesThunk());
     dispatch(countHowManyLikesThunk(stockID));
@@ -32,9 +35,21 @@ const StockStats = ({
   console.log("likesCount", likesCount);
 
   const likeStock = (stockID) => {
+    if (!loggedIn) {
+      navigate("/sign-in");
+      return;
+    }
     console.log("inside like stock, user id", userId);
     console.log("inside like stock, stock id", stockID);
     dispatch(toggleLikeThunk({ userId, stockID }));
+  };
+
+  const showComment = () => {
+    if (!loggedIn) {
+      navigate("/sign-in");
+      return;
+    }
+    setShowCommentBox(!showCommentBox);
   };
 
   return (
@@ -53,7 +68,7 @@ const StockStats = ({
         </div>
         <div className="col-6 text-center">
           <button
-            onClick={() => setShowCommentBox(!showCommentBox)}
+            onClick={() => showComment()}
             className="fa-regular bi bi-chat wd-grey-text wd-icon-button"
           ></button>
           <span className="wd-icons-text ms-2">{comments.length}</span>
