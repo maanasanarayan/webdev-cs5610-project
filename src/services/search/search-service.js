@@ -13,12 +13,12 @@ export const findStockBySearchTerm = async (term) => {
         },
         params: {
             'symbol' : term,
-            'outputsize' : '30'
+            'outputsize' : '1000'
         }
     }
     const response = await axios.get(`${SEARCH_URL}${term}`, config)
         .then(response => {
-            console.log("Response from API :",response.data)
+            // console.log("Response from API :",response.data)
             return response.data
         })
         .catch(error => {
@@ -26,7 +26,15 @@ export const findStockBySearchTerm = async (term) => {
             throw error
         })
 
-    return response.data
+    const symbols = new Set();
+    const result = [];
+    response.data.filter(i => i['currency'] === 'USD').forEach((i) => {
+        if(!symbols.has(i.symbol)) {
+            symbols.add(i.symbol);
+            result.push(i);
+        }
+    })
+    return result;
 }
 
 export const findMovieByImdbId = async (imdbID) => {

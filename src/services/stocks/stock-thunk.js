@@ -4,12 +4,25 @@ import {findAllStocks, createStock, deleteStock} from "./stock-service";
 export const createStocksThunk = createAsyncThunk(
     'createStock',
     async (newStock) => {
-        console.log("Reached Cretae stock thunk")
+        if(!newStock._id) {
+            return await createStock(newStock);
+        }
+        return newStock;
+    }
+);
+
+
+export const navigateStockAndNavigate = (newStock, navigate) => {
+    return async (dispatch) => {
+        console.log("Reached Cretae stock thunk", newStock, navigate)
         const stock = await createStock(newStock)
         console.log("Reached Cretae stock thunk, created :", stock)
-        return stock
+        navigate("/search-details", {
+            state: { stockDetails:  { ...newStock, ...stock} },
+        });
+        dispatch(createStocksThunk(stock));
     }
-)
+}
 
 export const findAllStocksThunk = createAsyncThunk(
     'findAllStocks',
