@@ -38,7 +38,7 @@ const HomePageNews = () => {
                         </div>
                         <div className="list-group m-4">
                             {bookmarks.map((n => 
-                                  <BookmarkItem bookmarks={n} />
+                                  <BookmarkItem   key={n.userEmail} bookmarks={n} />
                             ))
                             }
                         </div>

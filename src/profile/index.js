@@ -2,7 +2,10 @@ import { React, useState, useEffect } from "react";
 import "./index.css";
 import { update } from "../services/user-service";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import "./index.css";
 import { useSelector, useDispatch,useStore } from "react-redux";
@@ -69,6 +72,7 @@ const ProfileComponent = () => {
 
   let [gender, setGender] = useState({ gender: user.gender });
   const genderChangeHandler = (event) => {
+    console.log(event.target.value)
     const newGender = {
       gender: event.target.value,
     };
@@ -91,6 +95,7 @@ const ProfileComponent = () => {
   };
 
   const dispatch = useDispatch();
+
 
   const saveProfile = (e) => {
     e.preventDefault();
@@ -219,13 +224,16 @@ const ProfileComponent = () => {
             <Form.Group className="mb-3 formValues" controlId="firstName">
               <Form.Label>Gender</Form.Label>
               <Form.Control
-                value={gender.gender}
-                type="text"
-                disabled={isDisabled}
-                onChange={genderChangeHandler}
-              />
-
-              <Form.Text className="text-muted"></Form.Text>
+          as="select"
+          custom
+          disabled={isDisabled}
+          onChange={genderChangeHandler.bind(this)}
+        >
+          <option value="none">Choose your Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="non-binary">Non-Binary</option>
+        </Form.Control>
             </Form.Group>
           </div>
           <div class="col-md-6">
@@ -235,8 +243,9 @@ const ProfileComponent = () => {
                 value={phonenumber.phonenumber}
                 type="text"
                 disabled={isDisabled}
-                onChange={phoneNumberChangeHandler}
+                                onChange={phoneNumberChangeHandler}
               />
+                
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
           </div>
