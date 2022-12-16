@@ -1,10 +1,40 @@
 import { React, useState, useEffect } from "react";
+import { Navbar, Nav, Container } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { UNSAFE_DataRouterStateContext, useLocation } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
 import Form from "react-bootstrap/Form";
 
 
 const ProfileComponentAdmin = () => {
-  
+ const { user, loggedIn , allUsers, loading } = useSelector((state) => state.user);
+ const {stockdata}=useSelector((state)=>state.stockdata)
+ console.log(stockdata);
+ console.log({allUsers});
+ let count = Object.keys(allUsers).length;
+ console.log(count);
+
+ let countstocks = Object.keys(stockdata).length;
+ console.log(countstocks);
+ 
+var trader = allUsers.filter(function(ele){
+return ele.role=="TRADER";
+}
+);
+const counttrader=trader.length;
+console.log(counttrader);
+
+var industry = allUsers.filter(function(ele){
+    return ele.role=="INDUSTRY";
+    }
+    );
+
+ const countindustry =industry.length
+    console.log(countindustry );
+
+
   return (
     <section className="bg-light">
     <div className="container py-5 h-100">
@@ -27,12 +57,23 @@ const ProfileComponentAdmin = () => {
 
                     <div className="form-outline mb-4">
                     <Form.Group className="mb-3" controlId="users">
-                      <Form.Label>TOTAL USERS</Form.Label>
+                      <Form.Label>TOTAL TRADERS</Form.Label>
                          <Form.Control
-                         // value={address.address}
+                         value={counttrader}
                          type="text"
-                         //  disabled={isDisabled}
-                         // onChange={addressChangeHandler}
+                         
+                         />
+                        <Form.Text className="text-muted"></Form.Text>
+                        </Form.Group>
+                    </div>
+
+                    <div className="form-outline mb-4">
+                    <Form.Group className="mb-3" controlId="users">
+                      <Form.Label>TOTAL INDUSTRY</Form.Label>
+                         <Form.Control
+                         value={countindustry}
+                         type="text"
+                        
                          />
                         <Form.Text className="text-muted"></Form.Text>
                         </Form.Group>
@@ -42,10 +83,9 @@ const ProfileComponentAdmin = () => {
                     <Form.Group className="mb-3" controlId="stocks">
                       <Form.Label>TOTAL STOCKS</Form.Label>
                          <Form.Control
-                         // value={address.address}
+                         value={countstocks}
                          type="text"
-                         //  disabled={isDisabled}
-                         // onChange={addressChangeHandler}
+                         
                          />
                         <Form.Text className="text-muted"></Form.Text>
                         </Form.Group>

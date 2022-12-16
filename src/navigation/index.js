@@ -8,7 +8,7 @@ import { logout } from "../reducers/user-reducer";
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
-  const { user, loggedIn } = useSelector((state) => state.user);
+  const { user, loggedIn , allUsers, loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const NavigationComponent = () => {
   const dropdownToggle = () => {
     setExpanded((e) => !e);
   };
-
+ 
   const handleLogout = () => {
     setExpanded(false);
     dispatch(logout());
@@ -89,17 +89,42 @@ const NavigationComponent = () => {
                 </Link>
               </>
             )}
-            {loggedIn && (
+            {loggedIn &&  user.role === "ADMIN"&&  (
               <>
+              
                 <Link
-                  to="/profile"
+                  to="/profileadmin"
                   onClick={dropdownToggle}
                   className={`list-group-item ${
-                    active === "profile" ? "active" : ""
+                    active === "profileadmin" ? "active" : ""
                   }`}
                 >
-                  My Profile
+                  Dashboard
                 </Link>
+                
+                <div
+                  style={{ cursor: "pointer" }}
+                  className="list-group-item"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </>
+            )}
+            {loggedIn &&  user.role === "INDUSTRY" &&  (
+              <>
+                
+            
+                <Link
+                  to="/profilecompany"
+                  onClick={dropdownToggle}
+                  className={`list-group-item ${
+                    active === "profilecompany" ? "active" : ""
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                
                 <div
                   style={{ cursor: "pointer" }}
                   className="list-group-item"
