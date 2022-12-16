@@ -1,10 +1,12 @@
 import { React, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./index.css";
 import Form from "react-bootstrap/Form";
 
 
+
 const ProfileComponentCompany = () => {
-  
+  const { user, loggedIn , allUsers, loading } = useSelector((state) => state.user);
   return (
     <section className="bg-light">
     <div className="container py-5 h-100">
@@ -29,27 +31,15 @@ const ProfileComponentCompany = () => {
                     <Form.Group className="mb-3" controlId="users">
                       <Form.Label>COMPANY NAME</Form.Label>
                          <Form.Control
-                         // value={address.address}
+                         value={user.username}
                          type="text"
-                         //  disabled={isDisabled}
-                         // onChange={addressChangeHandler}
+                      
                          />
                         <Form.Text className="text-muted"></Form.Text>
                         </Form.Group>
                     </div>
 
-                    <div className="form-outline mb-4">
-                    <Form.Group className="mb-3" controlId="stocks">
-                      <Form.Label>REGISTRATION DATE</Form.Label>
-                         <Form.Control
-                         // value={address.address}
-                         type="date"
-                         //  disabled={isDisabled}
-                         // onChange={addressChangeHandler}
-                         />
-                        <Form.Text className="text-muted"></Form.Text>
-                        </Form.Group>
-                    </div>
+                   
 
                     <div className="form-outline mb-4">
                     <Form.Group className="mb-3" controlId="stocks">
@@ -77,19 +67,7 @@ const ProfileComponentCompany = () => {
                         </Form.Group>
                     </div>
 
-                    <div className="form-outline mb-4">
-                    <Form.Group className="mb-3" controlId="stocks">
-                      <Form.Label>ADDRESS</Form.Label>
-                         <Form.Control
-                         // value={address.address}
-                         type="text"
-                         //  disabled={isDisabled}
-                         // onChange={addressChangeHandler}
-                         />
-                        <Form.Text className="text-muted"></Form.Text>
-                        </Form.Group>
-                    </div>
-
+                  
                     
                   </Form>
                 </div>
