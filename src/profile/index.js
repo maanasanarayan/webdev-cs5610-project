@@ -197,6 +197,7 @@ const ProfileComponent = () => {
               <Form.Control
                 value={fname.fname}
                 type="text"
+                placeholder="Enter First Name"
                 disabled={isDisabled}
                 onChange={firstNameChangeHandler}
               />
@@ -212,6 +213,7 @@ const ProfileComponent = () => {
               <Form.Control
                 value={lname.lname}
                 type="text"
+                placeholder="Enter Last Name"
                 disabled={isDisabled}
                 onChange={lastNameChangeHandler}
               />
@@ -242,6 +244,8 @@ const ProfileComponent = () => {
               <Form.Control
                 value={phonenumber.phonenumber}
                 type="text"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                placeholder="123-456-7890"
                 disabled={isDisabled}
                                 onChange={phoneNumberChangeHandler}
               />
@@ -258,6 +262,7 @@ const ProfileComponent = () => {
               <Form.Control
                 value={dob.dob}
                 type="date"
+                placeholder="Enter your dob"
                 disabled={isDisabled}
                 onChange={dobChangeHandler}
               />
@@ -270,6 +275,7 @@ const ProfileComponent = () => {
               <Form.Control
                 value={address.address}
                 type="text"
+                placeholder="Enter Address"
                 disabled={isDisabled}
                 onChange={addressChangeHandler}
               />

@@ -21,7 +21,7 @@ const likeReducer = createSlice({
   initialState: initialState,
   extraReducers: {
     [countHowManyLikesThunk.fulfilled]: (state, action) => {
-      console.log("countHowManyLikesThunk: ", action, state);
+    
       state.likes.count = action.payload;
     },
     [findUserLikesStockThunk.fulfilled]: (state, action) => {
@@ -31,9 +31,22 @@ const likeReducer = createSlice({
       state.likes.count = action.payload.count;
       state.likes.userLiked = action.payload.userLiked;
     },
-    [resetLikesThunk.fulfilled]: (state, action) => {
-      state.likes.count = 0;
-      state.likes.userLiked = false;
+    
+
+    [findAllStocksLikedByUserThunk.pending]: (state) => {
+      state.loading = true;
+    
+    },
+    [findAllStocksLikedByUserThunk.fulfilled]: (state, { payload }) => {
+
+      state.loading = false;
+      state.likes.likedStocks = payload;
+      console.log("like reduceder payload",payload)
+    },
+    [findAllStocksLikedByUserThunk.rejected]: (state,{payload}) => {
+      console.log("rejected state", payload)
+      state.likes.likedStocks = false;
+
     },
   },
 });
