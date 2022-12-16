@@ -5,6 +5,8 @@ import {
   countHowManyLikes,
   findUserLikesStock,
   toggleLike,
+  findAllStocksLikedByUser
+
 } from "./like-service";
 
 //Thunk to get number of likes for a song
@@ -31,6 +33,16 @@ export const findUserLikesStockThunk = createAsyncThunk(
     return await findUserLikesStock(LikeObject.userId, LikeObject.stockID);
   }
 );
+
+export const findAllStocksLikedByUserThunk = createAsyncThunk(
+  "findAllStocksLikedByUser",
+  async(userId)=>{
+    console.log("in thunk of like")
+    const response = await findAllStocksLikedByUser(userId)
+    console.log("responsed in service",response)
+    return response
+  }
+)
 
 export const resetLikesThunk = createAsyncThunk(
   "findUserLikesStock",
