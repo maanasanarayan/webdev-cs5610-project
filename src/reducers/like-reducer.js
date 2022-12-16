@@ -22,7 +22,6 @@ const likeReducer = createSlice({
   extraReducers: {
     [countHowManyLikesThunk.fulfilled]: (state, action) => {
       console.log("countHowManyLikesThunk: ", action, state);
-      console.log("countHowManyLikesThunk: ", state.likes.likedSongs);
       state.likes.count = action.payload;
     },
     [findUserLikesStockThunk.fulfilled]: (state, action) => {
