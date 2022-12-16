@@ -2,7 +2,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router";
 import HomeComponent from "./home";
 import NavigationComponent from "./navigation";
-
 import newsReducer from "./reducers/news-reducer";
 import stockReducer from "./reducers/stocks-reducer";
 import userReducer from "./reducers/user-reducer";
@@ -16,6 +15,13 @@ import UserDetails from "./pages/dashboard";
 import EditProfile from "./pages/editProfile";
 import ProfileComponent from "./profile";
 import Bookmarks from "./bookmarks";
+import Footer from "./navigation/footer";
+import newsReducer from "./reducers/news-reducer";
+import userReducer from "./reducers/user-reducer";
+import stockReducer from "./reducers/stocks-reducer";
+import ProfileComponentAdmin from "./profile/profilepages/admin";
+import ProfileComponentCompany from "./profile/profilepages/comapny";
+
 const store = configureStore({
   reducer: {
     news: newsReducer,
@@ -27,6 +33,7 @@ const store = configureStore({
 
 function App() {
   const user = localStorage.getItem("token");
+
 
   return (
     <>
@@ -40,13 +47,14 @@ function App() {
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="profile" element={<ProfileComponent />} />
               <Route path="bookmarks" element={<Bookmarks />} />
+              <Route path="/profileadmin" element={<ProfileComponentAdmin/>}/>
+              <Route path="/profilecompany" element={<ProfileComponentCompany/>}/>
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
             </Routes>
           </div>
           <Footer />
         </Provider>
-
       </BrowserRouter>
     </>
   );

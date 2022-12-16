@@ -16,5 +16,3 @@ export const getRecommendedNews = async (symbol) => {
   const news = response.data.feed;
   return news.slice(0, 6);
 };
-
-

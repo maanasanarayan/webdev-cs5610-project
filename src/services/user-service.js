@@ -30,3 +30,7 @@ export const deleteUser = async (userId) => {
   console.log(response);
   return response.data;
 };
+
+export const profile = () =>
+    axios.post(`${API_BASE}/profile`)
+        .then(response => response.data);

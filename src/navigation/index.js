@@ -8,7 +8,7 @@ import { logout } from "../reducers/user-reducer";
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
-  const { user, loggedIn } = useSelector((state) => state.user);
+  const { user, loggedIn , allUsers, loading } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,10 +19,11 @@ const NavigationComponent = () => {
   const dropdownToggle = () => {
     setExpanded((e) => !e);
   };
-
+ 
   const handleLogout = () => {
     setExpanded(false);
     dispatch(logout());
+    navigate("/");
     window.location.reload();
   };
 
@@ -32,16 +33,22 @@ const NavigationComponent = () => {
         <div className="col-md-3 ">
           <Link to="/" style={{ textDecoration: "none" }}>
             <h3 className="wd-logo">NEUStockTrade</h3>
-          </Link>  
+          </Link>
         </div>
-        <div className="col-md-5"></div>
-        <div className="col-md-3 position-relative">
-          <input
+        <div className="col-md-7"></div>
+        <div className="col-md-1 pt-1">
+          {/* <input
             type="text"
             class="rounded-pill w-100 h-100 bg-light border-0 ps-3"
             placeholder="Search for companies"
-          />
-          <i className="bi bi-search position-absolute text-dark wd-search-icon"></i>
+          /> */}
+          <Link
+            to={"/search"}
+            className="fs-5 mt-2 text-decoration-none text-light"
+          >
+            <i className="bi bi-search me-2 text-light"></i>
+            Search
+          </Link>
         </div>
         <div className="col-md-1">
           <a onClick={dropdownToggle}>
@@ -82,17 +89,42 @@ const NavigationComponent = () => {
                 </Link>
               </>
             )}
-            {loggedIn && (
+            {loggedIn &&  user.role === "ADMIN"&&  (
               <>
+              
                 <Link
-                  to="/profile"
+                  to="/profileadmin"
                   onClick={dropdownToggle}
                   className={`list-group-item ${
-                    active === "profile" ? "active" : ""
+                    active === "profileadmin" ? "active" : ""
                   }`}
                 >
-                  My Profile
+                  Dashboard
                 </Link>
+                
+                <div
+                  style={{ cursor: "pointer" }}
+                  className="list-group-item"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </>
+            )}
+            {loggedIn &&  user.role === "INDUSTRY" &&  (
+              <>
+                
+            
+                <Link
+                  to="/profilecompany"
+                  onClick={dropdownToggle}
+                  className={`list-group-item ${
+                    active === "profilecompany" ? "active" : ""
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                
                 <div
                   style={{ cursor: "pointer" }}
                   className="list-group-item"
