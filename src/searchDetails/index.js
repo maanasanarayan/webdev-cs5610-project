@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import HomeStockStrip from "../home/home-stock-strip";
@@ -20,11 +20,16 @@ const SearchDetails = () => {
   const { state } = useLocation();
   //console.log("Parameters recevied :", state.stockDetails);
 
-  const stock = state.stockDetails;
+  const stock = useMemo(() => {
+    return state.stockDetails;
+  }, [state])
   const { user, loggedIn } = useSelector((state) => state.user);
   const { currentStockDetails } = useSelector((state) => state.stockdata);
   console.log("=====>>>>Currently logged in user is :", user);
-  const { currentStockId } = useSelector((state) => state.stocks);
+  // const { currentStockId } = useSelector((state) => state.stocks);
+  const currentStockId = useMemo(() => {
+    return stock._id;
+  }, [stock]);
   const navigate = useNavigate();
 
   //Load comments from store
@@ -44,12 +49,14 @@ const SearchDetails = () => {
   };
 
   useEffect(() => {
+    console.log("stock: ", stock);
+    console.log("currentStockId: ", currentStockId);
     dispatch(resetCommentsThunk());
     if (currentStockId) {
       console.log("Reached. Going to dispatch comments! ", currentStockId);
       dispatch(findCommentsThunk(currentStockId));
     }
-  }, [currentStockId]);
+  }, []);
 
   useEffect(() => {
     dispatch(resetStockDetailsThunk());

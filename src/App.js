@@ -17,13 +17,24 @@ import ProfileComponent from "./profile";
 import Bookmarks from "./bookmarks";
 import ProfileComponentAdmin from "./profile/profilepages/admin";
 import ProfileComponentCompany from "./profile/profilepages/comapny";
+import Search from "./search";
+import SearchDetails from "./searchDetails";
+import searchReducer from "./search/search-reducer";
+import commentReducer from "./reducers/comment-reducer";
+import likeReducer from "./reducers/like-reducer";
+import stocksReducer from "./reducers/stock-reducer";
+import PublicProfile from "./profile/publicProfile";
 
 const store = configureStore({
   reducer: {
     news: newsReducer,
     stockdata: stockReducer,
     user: userReducer,
-    bookmarks: bookmarksReducer
+    bookmarks: bookmarksReducer,
+    search: searchReducer,
+    comments: commentReducer,
+    likes: likeReducer,
+    stocks: stocksReducer
   },
 });
 
@@ -45,8 +56,11 @@ function App() {
               <Route path="bookmarks" element={<Bookmarks />} />
               <Route path="/profileadmin" element={<ProfileComponentAdmin/>}/>
               <Route path="/profilecompany" element={<ProfileComponentCompany/>}/>
+              <Route path="/profile/:uid" element={<PublicProfile/>}/>
               {user && <Route path="/userDetails" element={<UserDetails />} />}
               {user && <Route path="/editProfile" element={<EditProfile />} />}
+              <Route path="/search" element={<Search/>}/>
+              <Route path="/search-details" element={<SearchDetails/>}/>
             </Routes>
           </div>
           <Footer />

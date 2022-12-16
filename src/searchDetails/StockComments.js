@@ -4,6 +4,7 @@ import {
   updateCommentThunk,
 } from "../services/comments/comment-thunk";
 import { useDispatch } from "react-redux";
+import {Link} from "react-router-dom";
 
 const StockComments = ({ comment, userID, user }) => {
   const [editMode, setEditMode] = useState(false);
@@ -34,12 +35,25 @@ const StockComments = ({ comment, userID, user }) => {
     const commentObject = edit.comment;
     dispatch(updateCommentThunk({ userID, commentID, commentObject }));
   };
-
+  console.log("===>COMMENT OBJECT", comment);
   return (
     <li className="list-group-item">
       <div className="row">
         <div className="col-10">
-          <b className="wd-float-left me-2">{comment.postedBy.username}</b>
+
+            {!comment.postedBy.username && (
+                <Link to={`/profile/${user._id}`} key={user._id} >
+                <b className="wd-float-left me-2">{user.username}</b>
+                </Link>
+            )}
+
+          {comment.postedBy.username && (
+              <Link to={`/profile/${comment.postedBy._id}`} key={user._id}>
+                <b className="wd-float-left me-2">{comment.postedBy.username}</b>
+              </Link>
+          )}
+
+
           <span className="wd-float-left wd-grey-text wd-post-summary-spacing text-secondary">
             • {commentDate}
           </span>

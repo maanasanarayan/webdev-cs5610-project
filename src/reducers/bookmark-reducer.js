@@ -12,7 +12,7 @@ const bookmarkSlice = createSlice({
   reducers: {
 
     addBookmark(state, action) {
-      console.log(action.payload.bookmark.banner_image);
+      console.log("BOOKMARK IMAGE ===> ", action.payload.bookmark.banner_image);
       state.bookmarks.push({
         userEmail: action.payload.userEmail,
         bannerImage : action.payload.bookmark.banner_image,

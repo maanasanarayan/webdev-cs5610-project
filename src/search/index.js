@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import NavigationComponent from "../navigation";
 import { findStockBySearchTermThunk } from "../services/search/search-thunk";
 import HomeStockStrip from "../home/home-stock-strip";
-import { createStocksThunk } from "../services/stocks/stock-thunk";
+import {navigateStockAndNavigate} from "../services/stocks/stock-thunk";
 import { createStock } from "../services/stocks/stock-service";
 
 const Search = () => {
@@ -52,10 +52,7 @@ const Search = () => {
                           <div className="card-body">
                             <h5
                               onClick={() => {
-                                dispatch(createStocksThunk(searchedStock));
-                                navigate("/search-details", {
-                                  state: { stockDetails: searchedStock },
-                                });
+                                dispatch(navigateStockAndNavigate(searchedStock, navigate));
                               }}
                               style={{ cursor: "pointer" }}
                             >
