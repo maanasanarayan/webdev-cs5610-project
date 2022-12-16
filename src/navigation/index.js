@@ -8,7 +8,9 @@ import { logout } from "../reducers/user-reducer";
 
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
-  const { user, loggedIn , allUsers, loading } = useSelector((state) => state.user);
+  const { user, loggedIn, allUsers, loading } = useSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -19,7 +21,7 @@ const NavigationComponent = () => {
   const dropdownToggle = () => {
     setExpanded((e) => !e);
   };
- 
+
   const handleLogout = () => {
     setExpanded(false);
     dispatch(logout());
@@ -89,9 +91,8 @@ const NavigationComponent = () => {
                 </Link>
               </>
             )}
-            {loggedIn &&  user.role === "ADMIN"&&  (
+            {loggedIn && user.role === "ADMIN" && (
               <>
-              
                 <Link
                   to="/profileadmin"
                   onClick={dropdownToggle}
@@ -101,7 +102,7 @@ const NavigationComponent = () => {
                 >
                   Dashboard
                 </Link>
-                
+
                 <div
                   style={{ cursor: "pointer" }}
                   className="list-group-item"
@@ -111,10 +112,8 @@ const NavigationComponent = () => {
                 </div>
               </>
             )}
-            {loggedIn &&  user.role === "INDUSTRY" &&  (
+            {loggedIn && user.role === "INDUSTRY" && (
               <>
-                
-            
                 <Link
                   to="/profilecompany"
                   onClick={dropdownToggle}
@@ -124,7 +123,28 @@ const NavigationComponent = () => {
                 >
                   Dashboard
                 </Link>
-                
+
+                <div
+                  style={{ cursor: "pointer" }}
+                  className="list-group-item"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </>
+            )}
+            {loggedIn && user.role === "TRADER" && (
+              <>
+                <Link
+                  to="/profile"
+                  onClick={dropdownToggle}
+                  className={`list-group-item ${
+                    active === "profilecompany" ? "active" : ""
+                  }`}
+                >
+                  Dashboard
+                </Link>
+
                 <div
                   style={{ cursor: "pointer" }}
                   className="list-group-item"
