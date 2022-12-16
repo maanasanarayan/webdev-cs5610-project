@@ -16,6 +16,6 @@ export const findAllStocks = async () => {
 export const updateMovie = async () => {}
 export const deleteStock= async (sid) => {
     const response = await axios.delete(`${API_URL}/${sid}`)
-    const status = response.dataß
+    const status = response.data
     return sid;
 }

@@ -69,7 +69,6 @@ const SearchDetails = () => {
     return(
         <div>
             <HomeStockStrip />
-            {user && findAllStocksLikedByUser(user._id)}
             <div className="p-2">
                 <div className="mb-2 position-relative">
                 </div>
