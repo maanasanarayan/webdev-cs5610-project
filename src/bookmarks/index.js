@@ -1,53 +1,52 @@
-import React from "react";
-import { configureStore }
-    from '@reduxjs/toolkit';
-import "./index.css";
-import bookMarks from "./bookmarks.json";
-import { Card } from 'react-bootstrap';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import Bookmarks from "./bookmark-item";
+import {
+    getNewsThunk,
+    getRecommendedNewsThunk,
+} from "./../services/news-thunks";
+import { getAllUsersThunk, deleteUserThunk } from "./../services/user-thunks";
+import BookmarkItem from "./bookmark-item";
 import { useNavigate } from "react-router";
+const HomePageNews = () => {
 
-const BookmarksComponent = () => {
+    const { user, loggedIn, allUsers, loading } = useSelector(
+        (state) => state.user
+    );
+    const store = useStore();
+    const bookmarks = store.getState().bookmarks.bookmarks;
+    console.log(bookmarks);
+
     const navigate = useNavigate();
     function goToProfile() {
         navigate("/profile");
     }
+
     return (
-        <div class="bookMarkPage">
-            <div class="row">
+        <>
+                <>
+                    <div class="bookMarkPage">
+                        <div class="row">
 
-                <div class="col-11">
-                    <h1 style={{ color: "lightblue", textAlign: "center" }}>Your Bookmarks</h1>
-                </div>
-                <div class="col-1">
-                    <i style={{ fontSize: "35px", color: "lightblue", cursor: "pointer" }} onClick={goToProfile} class="bi bi-person-circle "></i>
+                            <div class="col-11">
+                                <h1 style={{ color: "lightblue", textAlign: "center" }}>Your Bookmarks</h1>
+                            </div>
+                            <div class="col-1">
+                                <i style={{ fontSize: "35px", color: "lightblue", cursor: "pointer" }} onClick={goToProfile} class="bi bi-person-circle "></i>
 
-                </div>
-
-
-            </div>
-
-            {
-                bookMarks.map(bookMark =>
-                    <div class="row" style={{ marginTop: "20px" }}>
-                        <div class="col-8 offset-2">
-
-                            <Card className="bg-light text-black" key={bookMark._id} >
-                                <Card.Body>
-                                    <Card.Title>{bookMark.name}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Day Range : <span style={{ color: "orange" }} >{bookMark.dayRange}</span> <br></br>52 Week Range : <span style={{ color: "orange" }} >{bookMark.WeekRange}</span> </Card.Subtitle>
-                                    <Card.Text>
-                                        Market Cap <span style={{ color: "green" }}>{bookMark.marketCap}</span>
-                                    </Card.Text>
-                                </Card.Body>
-
-
-
-                            </Card>
+                            </div>
                         </div>
-                    </div>)
-            }
-
-        </div>
+                        <div className="list-group m-4">
+                            {bookmarks.map((n => 
+                                  <BookmarkItem bookmarks={n} />
+                            ))
+                            }
+                        </div>
+                    </div>
+                </>
+            
+        </>
     );
 };
-export default BookmarksComponent;
+
+export default HomePageNews;

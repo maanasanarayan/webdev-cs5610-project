@@ -13,6 +13,12 @@ export const update = async ( updatedUser) => {
   return response.data;
 };
 
+export const addBookMark = async ( email, bookMark) => {
+  let body = { email,bookMark};
+  let response = await axios.put(`${API_BASE}/users/addBookmark`, body);
+  return response.data;
+};
+
 export const getAllUsers = async () => {
   let response = await axios.get(`${API_BASE}/users`);
   return response.data;

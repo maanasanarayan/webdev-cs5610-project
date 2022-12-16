@@ -4,6 +4,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { setLoggedInUser } from "./../../reducers/user-reducer";
+import {
+  getAllBookMarksThunk
+} from "../../services/bookmark-thunks";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +19,9 @@ const Login = () => {
 
     login(email, password).then((res) => {
       if (res.message === "Logged In") {
+        console.log(res.userDetail)
         dispatch(setLoggedInUser(res.userDetail));
+        dispatch(getAllBookMarksThunk(email))
         navigate("/");
       } else {
         alert("Invalid credentials! Please enter valid credentials!");

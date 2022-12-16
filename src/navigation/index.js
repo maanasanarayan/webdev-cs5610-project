@@ -4,7 +4,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UNSAFE_DataRouterStateContext, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../reducers/user-reducer";
+import { logout } from "../reducers/user-reducer";
+
 const NavigationComponent = () => {
   const [expanded, setExpanded] = useState(false);
   const { user, loggedIn } = useSelector((state) => state.user);
@@ -40,7 +41,7 @@ const NavigationComponent = () => {
             class="rounded-pill w-100 h-100 bg-light border-0 ps-3"
             placeholder="Search for companies"
           />
-          <Link to={"/search"}><i className="bi bi-search position-absolute text-dark wd-search-icon"></i></Link>
+          <i className="bi bi-search position-absolute text-dark wd-search-icon"></i>
         </div>
         <div className="col-md-1">
           <a onClick={dropdownToggle}>
