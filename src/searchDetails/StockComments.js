@@ -34,7 +34,7 @@ const StockComments = ({ comment, userID, user }) => {
     const commentObject = edit.comment;
     dispatch(updateCommentThunk({ userID, commentID, commentObject }));
   };
-
+  console.log("===>COMMENT OBJECT",comment);
   return (
     <li className="list-group-item">
       <div className="row">

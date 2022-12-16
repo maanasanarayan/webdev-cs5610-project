@@ -11,6 +11,7 @@ import {
 export const findCommentsThunk = createAsyncThunk(
   "findComments",
   async (sid) => {
+      console.log("SID => ", sid)
     return await findComments(sid);
   }
 );
@@ -50,7 +51,7 @@ export const countHowManyCommentsThunk = createAsyncThunk(
 );
 
 export const resetCommentsThunk = createAsyncThunk(
-  "countHowManyComments",
+  "resetComments",
   async () => {
     return [];
   }

@@ -19,7 +19,7 @@ const stocksReducer = createSlice({
         [createStocksThunk.pending]: (state, action) => {
             console.log("CreateStocksThunk stil in pending state")
         },[createStocksThunk.rejected]: (state, action) => {
-            console.log("CreateStocksThunk in rejected state")
+            console.log("CreateStocksThunk in rejected state: ", action)
         },
         [deleteStockThunk.fulfilled]: (state, action) => {
             // const midx = state.findIndex(m => m._id === action.payload)

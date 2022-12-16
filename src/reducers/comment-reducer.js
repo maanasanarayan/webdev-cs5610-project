@@ -44,7 +44,7 @@ const commentReducer = createSlice({
         ...payload,
       };
     },
-    [resetCommentsThunk.fulfilled]: (state, { payload }) => {
+    [resetCommentsThunk.fulfilled]: (state) => {
       state.comments = [];
       state.count = 0;
     },
