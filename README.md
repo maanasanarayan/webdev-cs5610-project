@@ -22,7 +22,7 @@ NEUStockTrade is your one-stop website for finding latest market news and trends
 ## Technical details
 
 - This repository is the frontend of the application built on React JS.
-- The backend of the application is built on Node JS and can be found here - https://github.com/maanasanarayan/webdev-cs5610-node-project
+- The backend of the application is built on Node JS with Express and can be found here - https://github.com/maanasanarayan/webdev-cs5610-node-project
 - The user related data is maintained in a Mongodb database
 - The application uses data from both, remote API and local database to display the content
 
